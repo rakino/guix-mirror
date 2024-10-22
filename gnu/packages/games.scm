@@ -10921,13 +10921,7 @@ levels to unlock.")
     (build-system cmake-build-system)
     (arguments
      `(#:configure-flags (list "-DSYSTEM_EXPAT=ON")
-       #:phases
-       (modify-phases %standard-phases
-         (replace 'check
-           (lambda* (#:key tests? #:allow-other-keys)
-             (when tests?
-               ;; Skip tests that require internet access.
-               (invoke "ctest" "-E" "(http|dns)")))))))
+       #:test-exclude "(http|dns)"))
     (inputs
      `(("boost" ,boost)
        ("curl" ,curl)
