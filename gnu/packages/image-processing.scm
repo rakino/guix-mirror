@@ -1183,7 +1183,7 @@ recalculates.")
            qtwebchannel-5
            qtwebengine-5
            qtx11extras
-           qtxmlpatterns
+           qtxmlpatterns-5
            sdl2
            sqlite
            tbb

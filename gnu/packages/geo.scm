@@ -3960,7 +3960,7 @@ latitude and longitude.")
            python-numpy
            qtbase-5
            qtsvg-5
-           qtxmlpatterns
+           qtxmlpatterns-5
            qwt
            zlib))
     (home-page "https://www.gplates.org")

@@ -1030,8 +1030,8 @@ settings (aliasing, linear interpolation and cubic interpolation).")
            pulseaudio
            qtbase-5
            qtsvg-5
-           qtxmlpatterns
            qtwayland-5
+           qtxmlpatterns-5
            zlib))
     (home-page "http://hydrogen-music.org/")
     (synopsis "Drum machine")
