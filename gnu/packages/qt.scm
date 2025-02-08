@@ -2887,7 +2887,7 @@ graphs by selecting one of the charts themes.")
     (home-page (package-home-page qtbase))
     (license (package-license qtbase))))
 
-(define-public qtdatavis3d
+(define-public qtdatavis3d-5
   (package
     (inherit qtsvg-5)
     (name "qtdatavis3d")
@@ -5319,7 +5319,7 @@ color-related widgets.")
     (build-system cmake-build-system)
     (inputs
      (list qtbase-5
-           qtdatavis3d
+           qtdatavis3d-5
            qtdeclarative-5
            qtlocation-5
            qtmultimedia-5
