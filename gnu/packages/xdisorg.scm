@@ -478,7 +478,7 @@ and preserve leading and trailing whitespace.")
       #:tests? #f)) ; Test suite is a rather manual process.
     (inputs
      (list qtbase-5
-           qtscript
+           qtscript-5
            qtsvg-5
            qtx11extras
            qtdeclarative-5

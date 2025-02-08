@@ -6200,7 +6200,7 @@ in-window at 640x480 resolution or fullscreen.")
                   openal
                   physfs
                   qtbase-5
-                  qtscript
+                  qtscript-5
                   openssl
                   sdl2
                   sqlite

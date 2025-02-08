@@ -316,7 +316,7 @@ setting @env{LUA_PATH} and @env{LUA_CPATH} in glirc's run-time environment.")
            qca
            qtbase-5
            qtmultimedia-5
-           qtscript
+           qtscript-5
            qtsvg-5
            snorenotify
            sonnet
@@ -1284,4 +1284,3 @@ such as multiple users, numerous @@url{https://ircv3.net/,IRCv3} extensions,
 chat history playback and detached channels.  It is well-suited for both small
 and large deployments.")
     (license license:agpl3)))
-
