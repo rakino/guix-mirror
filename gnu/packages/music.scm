@@ -6939,6 +6939,8 @@ ones.")
       (arguments
        (list
         #:tests? #f                     ;no test target
+        #:configure-flags
+        #~'("-Dcpp_args=-fpermissive") ;from `unsigned char*' to `char*'
         #:phases
         #~(modify-phases %standard-phases
             (add-after 'unpack 'patch-juce-fonts
