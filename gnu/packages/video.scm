@@ -1053,14 +1053,14 @@ H.264 (MPEG-4 AVC) video streams.")
 (define-public mkvtoolnix
   (package
     (name "mkvtoolnix")
-    (version "80.0")
+    (version "90.0")
     (source
      (origin
        (method url-fetch)
        (uri (string-append "https://mkvtoolnix.download/sources/"
                            "mkvtoolnix-" version ".tar.xz"))
        (sha256
-        (base32 "1x9k9pmw7mzm2amvm251a45dlj9p9iqfank5p4w2fizxkapws25v"))
+        (base32 "1c0a0x6lv64y9lym0rzfc16kywm7wbxn3fhh3ri6lgkjaia5ilim"))
        (modules '((guix build utils)))
        (snippet '(begin
                    ;; Delete bundled libraries.
