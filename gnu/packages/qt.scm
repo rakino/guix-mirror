@@ -889,7 +889,15 @@ tst_qt_cmake_create.cpp"
 
                 (substitute* "src/corelib/CMakeLists.txt"
                   (("/bin/ls")
-                   (search-input-file inputs "bin/ls")))))
+                   (search-input-file inputs "bin/ls")))
+
+                ;; Use shared-mime-info as the default MIME type database.
+                (substitute* "src/corelib/mimetypes/qmimedatabase.cpp"
+                  (("return dirs;" all)
+                   (string-append
+                    "dirs.append(\""
+                    #$(this-package-input "shared-mime-info") "/share/mime"
+                    "\");\n" all)))))
             (delete 'do-not-capture-python) ;move after patch-source-shebangs
             (add-after 'patch-source-shebangs 'do-not-capture-python
               (lambda _
@@ -1183,6 +1191,7 @@ tst_qt_cmake_create.cpp"
                 libsm
                 libxcb
                 libxext
+                shared-mime-info
                 xcb-util-cursor
                 `(,zstd "lib"))))
     (native-search-paths
