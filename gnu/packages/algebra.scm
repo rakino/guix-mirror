@@ -825,8 +825,7 @@ cosine/ sine transforms or DCT/DST).")
     ;; See: https://fftw.org/release-notes.html
     (name "fftw-cmake")
     (build-system cmake-build-system)
-    (arguments (default-keyword-arguments '()
-                                          '()))
+    (arguments '(#:tests? #f))
     (description (string-append (package-description fftw)
                   "  This CMake build offers the file
 FFTW3LibraryDepends.cmake required by some dependent packages, absent in the
@@ -1196,7 +1195,8 @@ features, and more.")
     (inherit eigen)
     (name "eigen-benchmarks")
     (arguments
-     '(#:phases (modify-phases %standard-phases
+     '(#:tests? #f ; no tests
+       #:phases (modify-phases %standard-phases
                   (delete 'configure)
                   (replace 'build
                     (lambda* (#:key outputs #:allow-other-keys)
