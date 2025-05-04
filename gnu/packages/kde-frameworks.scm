@@ -4196,7 +4196,7 @@ specification.")
 (define-public knotifyconfig
   (package
     (name "knotifyconfig")
-    (version "6.5.0")
+    (version "6.13.0")
     (source (origin
               (method url-fetch)
               (uri (string-append
@@ -4205,7 +4205,7 @@ specification.")
                     name "-" version ".tar.xz"))
               (sha256
                (base32
-                "1505xsrcn7zfaq5jkyj2dnj07fpagf4p3j2dmdgs1rjlzfzxcapv"))))
+                "1d1rz0p270fwx84870kj7nih40kkxnpl3963mf52zs0xzkmkk6xb"))))
     (build-system cmake-build-system)
     (native-inputs
      (list extra-cmake-modules))
@@ -4217,6 +4217,7 @@ specification.")
            kconfig
            kconfigwidgets
            kcoreaddons
+           kguiaddons
            kio
            kitemviews
            ki18n
@@ -4227,6 +4228,7 @@ specification.")
            kxmlgui
            phonon
            qtbase
+           qtmultimedia
            solid))
     (home-page "https://community.kde.org/Frameworks")
     (synopsis "Configuration dialog for desktop notifications")
