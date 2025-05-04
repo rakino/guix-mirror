@@ -1047,7 +1047,7 @@ replace the other outdated Graphviz tools.")
 (define-public kguiaddons
   (package
     (name "kguiaddons")
-    (version "6.5.0")
+    (version "6.13.0")
     (source (origin
               (method url-fetch)
               (uri (string-append
@@ -1056,7 +1056,7 @@ replace the other outdated Graphviz tools.")
                     name "-" version ".tar.xz"))
               (sha256
                (base32
-                "01s8mjpazvl4j1fhb00f24zcsbin5zjz319sv9znxyl51f9zm4vi"))))
+                "1gw4d2jmx7mrw2wklyh3q2yr4q1c3ri45jg3mgzy9f199zqa104j"))))
     (build-system qt-build-system)
     ;; TODO: Build packages for the Python bindings.  Ideally this will be
     ;; done for all versions of python guix supports.  Requires python,
@@ -1064,7 +1064,11 @@ replace the other outdated Graphviz tools.")
     ;; clang-python.
     (native-inputs (list extra-cmake-modules pkg-config))
     (inputs
-     (list libxkbcommon qtwayland plasma-wayland-protocols wayland))
+     (list libxkbcommon
+           qtdeclarative
+           qtwayland
+           plasma-wayland-protocols
+           wayland))
     (arguments (list #:qtbase qtbase))
     (home-page "https://community.kde.org/Frameworks")
     (synopsis "Utilities for graphical user interfaces")
