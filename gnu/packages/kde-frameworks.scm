@@ -503,7 +503,7 @@ documentation.")
 (define-public karchive
   (package
     (name "karchive")
-    (version "6.5.0")
+    (version "6.13.0")
     (source (origin
               (method url-fetch)
               (uri (string-append "mirror://kde/stable/frameworks/"
@@ -511,7 +511,7 @@ documentation.")
                                   "/" name "-" version ".tar.xz"))
               (sha256
                (base32
-                "0yaf8h2b8x9i9a3qm6bx1ksjmw0mj57ib18rds929q0dqx9h4lz5"))))
+                "146c9yaxljbmpbfhmj7ns87zzwb7svcp0g8mw9hjgzmx7b7mv6rw"))))
     (build-system cmake-build-system)
     (arguments
      (list #:phases #~(modify-phases %standard-phases
@@ -521,7 +521,7 @@ documentation.")
                               (invoke "ctest" "-E" "karchivetest")))))))
     (native-inputs
      (list extra-cmake-modules pkg-config qttools))
-    (inputs (list bzip2 qtbase xz zlib `(,zstd "lib")))
+    (inputs (list bzip2 openssl qtbase xz zlib `(,zstd "lib")))
     (synopsis "Qt 6 addon providing access to numerous types of archives")
     (description
      "KArchive provides classes for easy reading, creation and
