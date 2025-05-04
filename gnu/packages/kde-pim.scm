@@ -1593,7 +1593,7 @@ kwebengineviewer.")
         (base32 "19dnp955vii3vi1jaxgbsyabbb35iaqvhz9nnz392r3wz7f3hbyq"))))
     (build-system qt-build-system)
     (native-inputs
-     (list extra-cmake-modules tzdata-for-tests))
+     (list extra-cmake-modules glibc-utf8-locales tzdata-for-tests))
     (inputs
      (list kcodecs ki18n))
     (arguments
@@ -1603,11 +1603,7 @@ kwebengineviewer.")
                (add-after 'unpack 'fix-test-case
                  (lambda* (#:key inputs tests? #:allow-other-keys)
                    (when tests?
-                     (with-output-to-file "autotests/BLACKLIST"
-                       (lambda _
-                         (for-each
-                          (lambda (name) (display (string-append "[" name "]\n*\n")))
-                          (list "testFancyFormat"))))
+                     (setenv "LC_ALL" "en_US.utf8") ;for 'testFancyFormat'
                      (setenv "TZDIR" (search-input-directory
                                       inputs "share/zoneinfo"))))))))
     (home-page "https://api.kde.org/stable/kdepimlibs-apidocs/")
