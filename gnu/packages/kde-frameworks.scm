@@ -2525,7 +2525,7 @@ from DocBook files.")
 (define-public kfilemetadata
   (package
     (name "kfilemetadata")
-    (version "6.5.0")
+    (version "6.13.0")
     (source (origin
               (method url-fetch)
               (uri (string-append
@@ -2534,7 +2534,7 @@ from DocBook files.")
                     name "-" version ".tar.xz"))
               (sha256
                (base32
-                "1x60zl20qg19d615r62vf6kavzaij451n55wqvgqkqvz7n11ji2p"))))
+                "17mylkg821m4pxxkkqwsy1phfzqsby2ziz3jf0799mvwaw2ws3q9"))))
     (build-system cmake-build-system)
     (arguments
      (list
@@ -2543,6 +2543,7 @@ from DocBook files.")
           (replace 'check
             (lambda* (#:key tests? #:allow-other-keys)
               (when tests?
+                (setenv "QT_QPA_PLATFORM" "offscreen")
                 (invoke "ctest" "-E" "(exiv2extractortest|usermetadatawritertest)")))))))
     (native-inputs (list extra-cmake-modules pkg-config))
     (inputs
