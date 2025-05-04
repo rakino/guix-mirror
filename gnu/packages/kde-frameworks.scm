@@ -558,7 +558,7 @@ GZip format, via a subclass of QIODevice.")
 (define-public kcalendarcore
   (package
     (name "kcalendarcore")
-    (version "6.5.0")
+    (version "6.13.0")
     (source (origin
               (method url-fetch)
               (uri (string-append
@@ -567,7 +567,7 @@ GZip format, via a subclass of QIODevice.")
                     name "-" version ".tar.xz"))
               (sha256
                (base32
-                "08pm465rmy5va17kn86mw0pxskpnw9p04a7rq9acxxhmxpsrk9bd"))))
+                "0h8zzakprgsbblfff1hi5fgnxggb8v525mh5mjzgkyrr3y2lll71"))))
     (build-system cmake-build-system)
     (native-inputs
      (list extra-cmake-modules perl tzdata-for-tests))
