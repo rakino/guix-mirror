@@ -2411,7 +2411,7 @@ customizable platform for mobile devices.")
 (define-public plasma-pa
   (package
     (name "plasma-pa")
-    (version "6.1.4")
+    (version "6.3.4")
     (source (origin
               (method url-fetch)
               (uri (string-append "mirror://kde/stable/plasma/"
@@ -2419,7 +2419,7 @@ customizable platform for mobile devices.")
                                   version ".tar.xz"))
               (sha256
                (base32
-                "0kbkwkrr3g3gysnabvf3n4x5rp5ikx2zc4zpxd2gzagnm1hd8jrl"))))
+                "16cvbr7l9gh4jk4lkflyi3xxp6ks6iryaz3qnfjz4dvskgi69f9b"))))
     (build-system qt-build-system)
     (arguments (list #:qtbase qtbase
                      ;; test require selenium-webdriver-at-spi-run
