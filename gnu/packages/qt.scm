@@ -5751,44 +5751,39 @@ policy applications.")
            license:expat)))) ; everything else
 
 (define-public kdsoap
-  (package
-    (name "kdsoap")
-    (version "2.2.0")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (string-append "https://github.com/KDAB/KDSoap/releases/download/"
-                           "kdsoap-" version "/kdsoap-" version ".tar.gz"))
-       (sha256
-        (base32
-         "0mpkg9iyvzb6mxvhbi6zc052ids2r2nzpmjbljgpq6a2hja13vyr"))))
-    (build-system qt-build-system)
-    (inputs (list qtbase-5))
-    (arguments
-     (list #:configure-flags #~(list "-DKDSoap_TESTS=true")
-           #:phases
-           #~(modify-phases %standard-phases
-               (replace 'check
-                 (lambda* (#:key tests? #:allow-other-keys)
-                   (when tests?
-                     (invoke "ctest" "-E" ;; These tests try connect to the internet.
-                             "(kdsoap-test_webcalls|kdsoap-test_webcalls_wsdl|kdsoap-test_calc)")))))))
-    (home-page "https://www.kdab.com/development-resources/qt-tools/kd-soap/")
-    (synopsis "Qt SOAP component")
-    (description "KD SOAP is a tool for creating client applications for web
+  (let ((commit "46b89eee08fe4a608e243e619f48d02cb991e5d6")
+        (revision "0"))
+    (package
+      (name "kdsoap")
+      (version (git-version "2.2.0" revision commit ))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/KDAB/KDSoap")
+               (commit commit)
+               (recursive? #t)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32
+           "1f8ry0i0nf2pq6f3a5nkxd1a3vfhkn87yqk2jjq9wh98xxqs6jwg"))))
+      (build-system qt-build-system)
+      (arguments
+       (list #:qtbase qtbase
+             #:configure-flags #~(list "-DKDSoap_TESTS=true")
+             #:phases
+             #~(modify-phases %standard-phases
+                 (replace 'check
+                   (lambda* (#:key tests? #:allow-other-keys)
+                     (when tests?
+                       (invoke "ctest" "-E" ;; These tests try connect to the internet.
+                               "(kdsoap-test_webcalls|kdsoap-test_webcalls_wsdl|kdsoap-test_calc)")))))))
+      (home-page "https://www.kdab.com/development-resources/qt-tools/kd-soap/")
+      (synopsis "Qt SOAP component")
+      (description "KD SOAP is a tool for creating client applications for web
 services using the XML based SOAP protocol and without the need for a dedicated
 web server.")
-    (license (list license:gpl2 license:gpl3))))
-
-(define-public kdsoap-qt6
-  (package
-    (inherit kdsoap)
-    (name "kdsoap-qt6")
-    (arguments (substitute-keyword-arguments (package-arguments kdsoap)
-                 ((#:configure-flags flags #~(list))
-                  #~(cons "-DKDSoap_QT6=true" #$flags))))
-    (inputs (modify-inputs (package-inputs kdsoap)
-              (replace "qtbase" qtbase)))))
+      (license (list license:gpl2 license:gpl3)))))
 
 (define-public libaccounts-qt
   (package
