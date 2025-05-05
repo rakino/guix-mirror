@@ -323,7 +323,7 @@ games, and tools.")
 (define-public drkonqi
   (package
     (name "drkonqi")
-    (version "6.1.4")
+    (version "6.3.4")
     (source (origin
               (method url-fetch)
               (uri (string-append "mirror://kde/stable/plasma/"
@@ -331,7 +331,7 @@ games, and tools.")
                                   version ".tar.xz"))
               (sha256
                (base32
-                "0nrqw00ykqg0grbn54v0j0isxk94ill8ngxw815p343bn31ig5vb"))))
+                "02s0dd35vhdlj42wridxg7qrpbyayvz2bzsd9yvf69aiz7c793nq"))))
     (build-system qt-build-system)
     (arguments
      (list #:qtbase qtbase
@@ -344,12 +344,9 @@ games, and tools.")
                (add-after 'unpack 'set-gdb-path
                  (lambda* (#:key inputs #:allow-other-keys)
                    (let ((gdb (search-input-file inputs "/bin/gdb")))
-                     (substitute* "src/data/debuggers/internal/gdbrc"
-                       (("TryExec=gdb")
-                        (string-append "TryExec=" gdb "\n"
-                                       "CodeName=gdb"))
-                       (("(Exec|ExecWithSymbolResolution)=gdb" _ letters)
-                        (string-append letters "=" gdb))))))
+                     (substitute* "src/debugger.cpp"
+                       (("u\"gdb")
+                        (string-append "u\"" gdb))))))
                (replace 'check
                  (lambda* (#:key tests? #:allow-other-keys)
                    (when tests?
