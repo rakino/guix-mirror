@@ -1148,14 +1148,14 @@ an elegant and intuitive experience for your tasks and plasmoids.")
 (define-public libkscreen
   (package
     (name "libkscreen")
-    (version "6.1.4")
+    (version "6.3.4")
     (source
      (origin
        (method url-fetch)
        (uri (string-append "mirror://kde/stable/plasma/" version "/"
                            name "-" version ".tar.xz"))
        (sha256
-        (base32 "0yv65jsfqynhhnrj54l8hgiv8immzsxky3gwdawp0qmwxjz640kk"))))
+        (base32 "0g7cp7p209gj84bfwv843lfc4vs58pa6pg62150bvb0m25h1bvdc"))))
     (build-system qt-build-system)
     (arguments
      (list
