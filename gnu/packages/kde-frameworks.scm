@@ -5036,7 +5036,7 @@ descriptions for integrating actions from plugins.")
 (define-public libplasma
   (package
     (name "libplasma")
-    (version "6.1.4")
+    (version "6.3.4")
     (source (origin
               (method url-fetch)
               (uri (string-append "mirror://kde/stable/plasma/"
@@ -5044,7 +5044,7 @@ descriptions for integrating actions from plugins.")
                                   version ".tar.xz"))
               (sha256
                (base32
-                "0444dcm9dfikhmf9spadjgi5nrn50ilw5alr2w6nxs30k56k3zia"))))
+                "1w7m038gr7d6r7dbaf97ihvdpr0abca2iaafiwkkkyr1j85rf2w8"))))
     (build-system qt-build-system)
     (propagated-inputs
      (list kpackage kwindowsystem))
