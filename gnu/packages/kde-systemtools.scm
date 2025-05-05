@@ -385,60 +385,6 @@ This package is part of the KDE administration module.")
      "This package provides a tool to manage passwords on @code{kwallet}.")
     (license license:gpl2+)))
 
-(define-public spectacle
-  (package
-    (name "spectacle")
-    (version "24.02.2")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (string-append "mirror://kde/stable/release-service/" version
-                           "/src/spectacle-" version ".tar.xz"))
-       (sha256
-        (base32 "0li1fhhvqk5y1j0jpazhjw1qh5mnwzn4dkl85bmlsn5hbqszf621"))))
-    (build-system qt-build-system)
-    (arguments
-     (list #:qtbase qtbase
-           #:phases
-           #~(modify-phases %standard-phases
-               (replace 'check
-                 (lambda* (#:key tests? #:allow-other-keys)
-                   (when tests?
-                     (invoke "ctest" "-E"
-                             "filename_test")))))))
-    (native-inputs
-     (list extra-cmake-modules kdoctools))
-    (inputs
-     (list kconfig
-           kcoreaddons
-           kdbusaddons
-           kglobalaccel
-           kguiaddons
-           ki18n
-           kio
-           kirigami
-           knotifications
-           kpipewire
-           kwidgetsaddons
-           kwindowsystem
-           kxmlgui
-           purpose
-           layer-shell-qt
-           qtdeclarative
-           qtmultimedia
-           qtwayland
-           wayland
-           wayland-protocols
-           plasma-wayland-protocols
-           xcb-util
-           xcb-util-cursor
-           xcb-util-image
-           libxkbcommon))
-    (home-page "https://apps.kde.org/spectacle/")
-    (synopsis "Screenshot capture utility for KDE")
-    (description "Spectacle is a screenshot taking utility for the KDE.")
-    (license license:gpl2+)))
-
 (define-public yakuake
   (package
     (name "yakuake")
