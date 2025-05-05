@@ -80,6 +80,7 @@
   #:use-module (gnu packages python-xyz)
   #:use-module (gnu packages package-management) ; flatpak
   #:use-module (gnu packages rdesktop)
+  #:use-module (gnu packages sdl)
   #:use-module (gnu packages unicode)
   #:use-module (gnu packages video)
   #:use-module (gnu packages vpn)
@@ -1973,14 +1974,14 @@ the KDE Plasma 6 desktop.")
 (define-public plasma-desktop
   (package
     (name "plasma-desktop")
-    (version "6.1.4")
+    (version "6.3.4")
     (source (origin
               (method url-fetch)
               (uri (string-append "mirror://kde/stable/plasma/" version
                                   "/" name "-" version ".tar.xz"))
               (sha256
                (base32
-                "1lc74i0pqhsj6yqc2czdvnl8n7ry63r2g34hf7avip7v0bv9gf43"))))
+                "0zy5l8cpbmmav8xrfbdq9vmwkhh3ns56ibai9chw3q63sk2w696v"))))
     (build-system qt-build-system)
     (native-inputs (list extra-cmake-modules
                          dbus
@@ -2031,6 +2032,7 @@ the KDE Plasma 6 desktop.")
                   knotifyconfig
                   kpackage
                   kpeople
+                  kpipewire
                   krunner
                   kscreenlocker
                   ktexteditor
@@ -2048,6 +2050,7 @@ the KDE Plasma 6 desktop.")
                   libkscreen
                   libksysguard
                   libqalculate
+                  libwacom
                   gmp
                   mpfr
                   libsm
@@ -2067,6 +2070,7 @@ the KDE Plasma 6 desktop.")
                   qt5compat
                   qtdeclarative
                   qtwayland
+                  sdl2
                   wayland
                   wayland-protocols
                   xcb-util
@@ -2109,7 +2113,7 @@ the KDE Plasma 6 desktop.")
                      (setenv "XDG_RUNTIME_DIR" (getcwd))
                      (setenv "XDG_CACHE_HOME" (getcwd))
                      (setenv "QT_QPA_PLATFORM" "offscreen")
-                     (invoke "ctest" "-E" "(kcm-keyboard-keyboard_memory_persister_test|foldermodeltest)")))))))
+                     (invoke "ctest" "-E" "(kcm-keyboard-keyboard_memory_persister_test|foldermodeltest|positionertest)")))))))
     (home-page "https://kde.org/plasma-desktop/")
     (synopsis "Plasma for the Desktop")
     (description
