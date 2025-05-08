@@ -795,14 +795,14 @@ Its features include:
 (define-public libkcddb
   (package
     (name "libkcddb")
-    (version "24.05.2")
+    (version "25.04.0")
     (source
      (origin
        (method url-fetch)
        (uri (string-append "mirror://kde/stable/release-service/" version
                            "/src/libkcddb-" version ".tar.xz"))
        (sha256
-        (base32 "0b2khcfm3jnc4iar0ljsq0z3dr3ak6jyaqnbgwj3yk2j05j0yc9n"))))
+        (base32 "10m4klkm7bz0d1qkpj53dhy0mp7haddpq4a5c8lq442ds09hrv0b"))))
     (build-system qt-build-system)
     (native-inputs
      (list extra-cmake-modules kdoctools))
