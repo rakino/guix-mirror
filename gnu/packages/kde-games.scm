@@ -883,14 +883,14 @@ This package is part of the KDE games module.")
 (define-public bomber
   (package
     (name "bomber")
-    (version "24.12.3")
+    (version "25.04.0")
     (source
      (origin
        (method url-fetch)
        (uri (string-append "mirror://kde/stable/release-service/" version
                            "/src/bomber-" version ".tar.xz"))
        (sha256
-        (base32 "03llwmd8ichdb9n2xy0rhxy3hwzrxq39jmspjcynxnapl8qq2jnh"))))
+        (base32 "1s4cg6mqdb9fa3jp85s45wrli9gxm6s6hs1blbnfs80468m94qqy"))))
     (build-system qt-build-system)
     (native-inputs
      (list extra-cmake-modules kdoctools))
@@ -901,6 +901,7 @@ This package is part of the KDE games module.")
            kcrash
            kdbusaddons
            ki18n
+           kiconthemes
            kxmlgui
            libkdegames
            qtdeclarative))
