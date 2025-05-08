@@ -664,39 +664,39 @@ Its main features are:
 (define-public kmix
   (package
     (name "kmix")
-    (version "24.05.2")
+    (version "25.04.0")
     (source
      (origin
        (method url-fetch)
        (uri (string-append "mirror://kde/stable/release-service/" version
                            "/src/kmix-" version ".tar.xz"))
        (sha256
-        (base32 "1ha0sil2vbpvgys7jkhav7j5g7drg57ypr8c9i3c8ndqwpsyxk3g"))))
+        (base32 "1zxrj105zvmwbj0dcmhzmh7aj1rl56v5bai8a2lwbrrr8dvrnwnx"))))
     (build-system qt-build-system)
     (native-inputs
-     (list extra-cmake-modules kdoctools-5 pkg-config))
+     (list extra-cmake-modules kdoctools pkg-config))
     (inputs
      (list alsa-lib
            glib
-           kconfigwidgets-5
-           kcompletion-5
-           kconfig-5
-           kconfigwidgets-5
-           kcrash-5
-           kdbusaddons-5
-           kglobalaccel-5
-           ki18n-5
-           kiconthemes-5
-           knotifications-5
-           kwidgetsaddons-5
-           kwindowsystem-5
-           kxmlgui-5
+           kcompletion
+           kconfig
+           kconfigwidgets
+           kcrash
+           kdbusaddons
+           kglobalaccel
+           ki18n
+           kiconthemes
+           knotifications
+           kstatusnotifieritem
+           kwidgetsaddons
+           kwindowsystem
+           kxmlgui
            libcanberra
            breeze-icons ; default icon set
-           plasma-framework
+           libplasma
            pulseaudio
-           qtbase-5
-           solid-5))
+           solid))
+    (arguments (list #:qtbase qtbase))
     (home-page "https://apps.kde.org/kmix/")
     (synopsis "Volume control and mixer")
     (description "KMix is an audio device mixer, used to adjust volume, select
