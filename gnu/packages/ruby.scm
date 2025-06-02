@@ -206,7 +206,7 @@ a focus on simplicity and productivity.")
 (define-public ruby-3.1
   (package
     (inherit ruby-3.2)
-    (version "3.1.6")
+    (version "3.1.7")
     (source
      (origin
        (method url-fetch)
@@ -215,7 +215,7 @@ a focus on simplicity and productivity.")
                            "/ruby-" version ".tar.xz"))
        (sha256
         (base32
-         "00k17kkajmk3dwawlvf312sm4hf5980khpfbcdl8lb95ky2d2ysr"))))
+         "0ddhh3nzfnwwb0ks3rsmf3w1m71ban30wf61djn8gnkbbd2wr2k5"))))
     (inputs
      (modify-inputs (package-inputs ruby-3.2)
        (delete "libyaml")))))
