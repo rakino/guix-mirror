@@ -142,6 +142,7 @@
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:skip-build? #t
       #:import-path "9fans.net/go"
       #:test-subdirs #~(list "acme/..."
@@ -559,7 +560,9 @@ commands.")
         (base32 "1z64yzr2l5j5r5rqi89jk4madn3ak8hw95lva5ra7gnlyhh2vs05"))))
     (build-system go-build-system)
     (arguments
-     (list #:import-path "git.sr.ht/~rockorager/tcell-term"))
+     (list
+      #:go go-1.23
+      #:import-path "git.sr.ht/~rockorager/tcell-term"))
     (native-inputs
      (list go-github-com-stretchr-testify))
     (propagated-inputs
@@ -974,7 +977,9 @@ prompts on terminals supporting ANSI escape sequences.")
     (build-system go-build-system)
     ;; TODO: Build cmd/chroma and cmd/chromad commands.
     (arguments
-     `(#:import-path "github.com/alecthomas/chroma"))
+     (list
+      #:go go-1.23
+      #:import-path "github.com/alecthomas/chroma"))
     (native-inputs
      (list go-github-com-alecthomas-kong
            go-github-com-alecthomas-kong-hcl
@@ -1393,6 +1398,7 @@ environment and runtime configuration.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/AndreasBriese/bbloom"))
     (home-page "https://github.com/AndreasBriese/bbloom")
     (synopsis "Bitset Bloom filter for Golang")
@@ -1699,6 +1705,7 @@ cluster segmentation algorithm.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/arbovm/levenshtein"))
     (home-page "https://github.com/arbovm/levenshtein")
     (synopsis "Levenshtein Distance in Golang")
@@ -1819,6 +1826,7 @@ for Go.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/asaskevich/govalidator"
       #:phases
       #~(modify-phases %standard-phases
@@ -2304,6 +2312,7 @@ based on murmurhash.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       ;; This test fails with Go 1.16.
       #:test-flags #~(list "-skip" "TestMatch")
       #:import-path "github.com/bmatcuk/doublestar"))
@@ -4225,6 +4234,7 @@ parse and compare two semantic version strings.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/coreos/go-systemd/v22"
       #:phases
       #~(modify-phases %standard-phases
@@ -4574,6 +4584,8 @@ structs in the Go programming language.")
     (outputs '("out" "doc"))
     (arguments
      (list
+      ;; See <https://github.com/d5/tengo/issues/466>.
+      #:go go-1.23
       #:import-path "github.com/d5/tengo/v2"
       #:phases
       #~(modify-phases %standard-phases
@@ -6685,6 +6697,7 @@ also favors portability, and includes support for all POSIX systems.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/gdey/errors"))
     (home-page "https://github.com/gdey/errors")
     (synopsis "Augmentation of std @code{errors} library")
@@ -6732,6 +6745,7 @@ library in go standard library.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/ghemawat/stream"))
     (home-page "https://github.com/ghemawat/stream")
     (synopsis "UNIX pipe-like chained filters")
@@ -6879,6 +6893,7 @@ goroutines.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/go-errors/errors"
       ;; Stack trace does not contain source line: 'a: b(5)'.
       #:test-flags #~(list "-skip" "TestStackFormat")))
@@ -7235,6 +7250,7 @@ professionally translated
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/go-spatial/proj"))
     (native-inputs
      (list go-github-com-stretchr-testify))
@@ -7450,6 +7466,7 @@ native Go structure.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/gobwas/glob"))
     (home-page "https://github.com/gobwas/glob")
     (synopsis "Go globbing library")
@@ -7547,6 +7564,7 @@ size.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/godbus/dbus"
       #:phases
       #~(modify-phases %standard-phases
@@ -7677,6 +7695,7 @@ execution.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/gogs/chardet"))
     (home-page "https://github.com/gogs/chardet")
     (synopsis "Character set detection for Go")
@@ -8186,6 +8205,7 @@ provides a buffered io.Writer that is flushed at a timed interval.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/goverter/patherr"))
     (home-page "https://github.com/goverter/patherr")
     (synopsis "Implementation for Goverter's wrapErrorsUsing")
@@ -9882,6 +9902,7 @@ object, which implements simple error-retrying functionality.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/jbenet/goprocess"
       #:test-flags
       #~(list "-short"
@@ -10048,6 +10069,7 @@ text, etc. with a heavy emphasis on customization.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/jessevdk/go-flags"
       #:test-flags #~(list "-skip" "TestCompletion|TestParserCompletion")))
     (propagated-inputs
@@ -10561,6 +10583,7 @@ resources located relative to the executable file.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/karrick/godirwalk"))
     ;; To build all examples as a test scenario.
     (native-inputs
@@ -11425,6 +11448,7 @@ structure.  It's a stable fork of https://github.com/mndrix/ps.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "layeh.com/gopher-luar"))
     (propagated-inputs (list go-github-com-yuin-gopher-lua))
     (home-page "https://github.com/layeh/gopher-luar")
@@ -11965,6 +11989,7 @@ generation.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/MakeNowJust/heredoc"))
     (home-page "https://github.com/MakeNowJust/heredoc")
     (synopsis "Here-documents with indent")
@@ -12024,6 +12049,7 @@ implementing features like:
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/Masterminds/goutils"))
     (home-page "https://github.com/Masterminds/goutils/")
     (synopsis "Utility functions to manipulate strings")
@@ -12307,14 +12333,16 @@ string.")
          "0l0l5s4hlsrm4z6hygig2pp1qirk5ycrzn9z27ay3yvg9k7zafzx"))))
     (build-system go-build-system)
     (arguments
-     `(#:import-path "github.com/mattn/go-shellwords"
-       #:phases
-       (modify-phases %standard-phases
-         (add-after 'unpack 'patch-sh-path
-           (lambda* (#:key import-path #:allow-other-keys)
-             (substitute* (string-append
-                           "src/" import-path "/util_posix.go")
-               (("/bin/sh") (which "sh"))))))))
+     (list
+      #:go go-1.23
+      #:import-path "github.com/mattn/go-shellwords"
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'patch-sh-path
+            (lambda* (#:key import-path #:allow-other-keys)
+              (substitute* (string-append
+                            "src/" import-path "/util_posix.go")
+                (("/bin/sh") (which "sh"))))))))
     (home-page "https://github.com/mattn/go-shellwords")
     (synopsis "Parse lines into shell words")
     (description "This package parses text into shell arguments.  Based on
@@ -12886,6 +12914,7 @@ parsing.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/moby/sys/mountinfo"
       #:unpack-path "github.com/moby/sys"
       #:test-flags
@@ -13296,6 +13325,7 @@ Authentication Modules, PAM} application API.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/muesli/cancelreader"))
     (propagated-inputs
      (list go-golang-org-x-sys))
@@ -13822,6 +13852,7 @@ pretty printed rendering in Golang.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:skip-build? #t
       #:import-path "github.com/nlpodyssey/spago"))
     (native-inputs
@@ -13944,6 +13975,7 @@ NSQ protocol @url{https://nsq.io/}.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/nxadm/tail"))
     (propagated-inputs
      (list go-github-com-fsnotify-fsnotify
@@ -14362,6 +14394,7 @@ composable way such that accurate error can be reasoned about.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/orisano/pixelmatch"))
     (home-page "https://github.com/orisano/pixelmatch")
     (synopsis "Pixelmatch port to Go")
@@ -14519,6 +14552,7 @@ processes.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/pborman/getopt"))
     (home-page "https://github.com/pborman/getopt")
     (synopsis "Getopt style option parsing for Go")
@@ -14590,7 +14624,9 @@ package (which is based off an earlier version of this package).")
         (base32 "1wypjrr1axkrkzp4n5gvams94f2sd7dq1pdpd2i35sgpdz6r2m6g"))))
     (build-system go-build-system)
     (arguments
-     (list #:import-path "github.com/pelletier/go-toml"))
+     (list
+      #:go go-1.23
+      #:import-path "github.com/pelletier/go-toml"))
     (propagated-inputs
      (list go-github-com-burntsushi-toml
            go-github-com-davecgh-go-spew
@@ -14850,6 +14886,7 @@ on top of the standard library @code{flag} package.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/pingcap/errors"
       #:test-flags
       #~(list "-skip" (string-join
@@ -14914,6 +14951,7 @@ Pion}.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/pkg/diff"))
     (home-page "https://github.com/pkg/diff/")
     (synopsis "Create and print diffs")
@@ -15003,6 +15041,7 @@ https://en.wikipedia.org/wiki/Extended_file_attributes}.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/pmezard/go-difflib/difflib"
       #:unpack-path "github.com/pmezard/go-difflib/"))
     (home-page "https://github.com/pmezard/go-difflib")
@@ -15027,6 +15066,7 @@ https://en.wikipedia.org/wiki/Extended_file_attributes}.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/polydawn/refmt"))
     (propagated-inputs
      (list go-github-com-go-yaml-yaml
@@ -15566,7 +15606,9 @@ logging.")
        (sha256
         (base32 "0d1rg1drrfmabilqjjayklsz5d0n3hkf979sr3wsrw92bfbkivs7"))))
     (arguments
-     (list #:import-path "github.com/russross/blackfriday/v2"))))
+     (list
+      #:go go-1.23
+      #:import-path "github.com/russross/blackfriday/v2"))))
 
 (define-public go-github-com-rwcarlsen-goexif
   ;; No release or version tag, Golang pseudo version:
@@ -15998,6 +16040,7 @@ and branchless algorithms shine.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:skip-build? #t
       #:import-path "github.com/segmentio/encoding"
       #:test-flags #~(list "-skip" "TestUnmarshalFixture|TestDecodeFixture")))
@@ -16329,6 +16372,7 @@ GNU/Linux, this is a proxy for the @command{xdg-open} command.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/smacker/go-tree-sitter"))
     (native-inputs (list go-github-com-stretchr-testify))
     (home-page "https://github.com/smacker/go-tree-sitter")
@@ -16776,6 +16820,7 @@ slices, JSON and other data.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/subosito/gotenv"))
     (native-inputs
      (list go-github-com-stretchr-testify))
@@ -17991,6 +18036,7 @@ weighted moving averages}.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/vmihailenco/msgpack/v4"))
     (native-inputs
      (list go-gopkg-in-check-v1))
@@ -18115,6 +18161,7 @@ Redis.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/warpfork/go-fsx"))
     (home-page "https://github.com/warpfork/go-fsx")
     (synopsis "Extended filesystem interface for Golang")
@@ -18732,6 +18779,7 @@ common sequence} values from two arbitrary arrays.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "github.com/yuin/gopher-lua"
       #:phases
       #~(modify-phases %standard-phases
@@ -19457,6 +19505,7 @@ written in YAML or JSON.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "go.mongodb.org/mongo-driver"
       #:test-flags
       #~(list "-skip"
@@ -19898,6 +19947,7 @@ APIs may be unstable
       (build-system go-build-system)
       (arguments
        (list
+        #:go go-1.23
         #:skip-build? #t
         #:import-path "go4.org"
         #:test-subdirs
@@ -20485,6 +20535,7 @@ dependencies.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "howett.net/plist"
       ;; cmd requires gopkg.in/yaml.v1
       #:test-subdirs #~(list "internal/..." ".")))
@@ -20559,6 +20610,7 @@ split out here for ease of reuse and maintainability.")
     (build-system go-build-system)
     (arguments
      (list
+      #:go go-1.23
       #:import-path "k8s.io/klog/v2"
       #:test-flags
       #~(list "-skip"
