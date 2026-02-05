@@ -122,6 +122,8 @@
   #:use-module (gnu packages qt)
   #:use-module (gnu packages readline)
   #:use-module (gnu packages rsync)
+  #:use-module (gnu packages rust)
+  #:use-module (gnu packages rust-apps)
   #:use-module (gnu packages serialization)
   #:use-module (gnu packages sssd)
   #:use-module (gnu packages sqlite)
@@ -757,7 +759,7 @@ from a mounted file system.")
   ;; completions by running a native bcachefs binary at build time.
   (package
     (name "bcachefs-tools-minimal")
-    (version "1.37.4")
+    (version "1.39.6")
     (source
      (origin
        (method git-fetch)
@@ -766,7 +768,7 @@ from a mounted file system.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "17041jphzbg0ppxlc1acr3d73zyn02spjvi5my30wak8xh9n6nan"))))
+        (base32 "0sfv218870pvhinh3vlwci5qfr5dp26y3a799rmkwbcy1vz2f5kh"))))
     (build-system cargo-build-system)
     (arguments
      (list
@@ -802,22 +804,34 @@ from a mounted file system.")
                  "install: all")
                 (("target/release")
                  #$(bcachefs-tools-target/release)))))
+          (replace 'check
+              (lambda* (#:key tests? #:allow-other-keys)
+                (when tests?
+                    (apply invoke "cargo" "test"
+                           "--lib" "--bins" "--tests"
+                           "--examples" ; Omitting "--docs" to skip doctests
+                           #$(bcachefs-tools-cargo-args)))))
           (replace 'install
             (lambda _
               (apply invoke "make" "install"
                      #$(bcachefs-tools-make-install-flags)))))))
     (native-inputs
-     (list pkg-config))
+     (list pkg-config
+           rust
+           rust-bindgen-cli
+           rust-cbindgen))
     (inputs
-     (cons* clang-13
+     (cons* clang-18 ;Same version as used for rust-bindgen-cli
             eudev
             keyutils
             libaio
             libscrypt
             libsodium
             liburcu
+            libunwind
             `(,util-linux "lib")        ;libblkid
             lz4
+            xz                          ;for liblzma
             zlib
             `(,zstd "lib")
             (cargo-inputs 'bcachefs-tools)))
@@ -906,6 +920,7 @@ performance and other characteristics.")
                 (setenv "RUSTFLAGS" (string-join
                                      '("-C" "link-arg=-z"
                                        "-C" "link-arg=muldefs"
+                                       "-C" "link-arg=-llzma"
                                        "-C" "target-feature=+crt-static"
                                        "-C" "relocation-model=static")
                                      " "))))
@@ -918,10 +933,6 @@ performance and other characteristics.")
                        (string-append "VERSION="
                                       #$(package-version this-package))
                        #$(bcachefs-tools-make-flags))))
-            (replace 'check
-              (lambda* (#:key tests? #:allow-other-keys)
-                (when tests?
-                  (apply invoke "cargo" "test" #$(bcachefs-tools-cargo-args)))))
             (replace 'install
               (lambda _
                 (apply invoke "make" "install"
@@ -931,8 +942,10 @@ performance and other characteristics.")
               (prepend `(,eudev "static")
                        `(,keyutils "static")
                        `(,libscrypt "static")
+                       libunwind-static
                        `(,lz4 "static")
                        `(,util-linux "static")
+                       `(,xz "static")
                        `(,zlib "static")
                        `(,zstd "static"))))
     (synopsis "Statically-linked, minimal variant of bcachefs-tools")))
@@ -986,6 +999,7 @@ minimal bcachefs-tools package.  It is meant to be used in initrds.")
                                     (getcwd) "/")
                      "DKMSDIR=build/"
                      make-flags))))))
+    (native-inputs (list pkg-config rust rust-bindgen-cli rust-cbindgen))
     (home-page (package-home-page bcachefs-tools-minimal))
     (synopsis "Bcachefs Linux kernel module")
     (description
