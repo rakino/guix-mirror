@@ -1861,7 +1861,6 @@ for xdg-desktop-portal that is using Qt/KF5.")
                          (mkdir #$output))))
     ;; These inputs are used by plasma-desktop-service-type.
     (inputs (list bolt         ;for plasma-thunderbolt
-                  fwupd        ;for kinfocenter and discover
                   packagekit)) ;for discover
     (propagated-inputs (list appmenu-gtk-module
                              aurorae
