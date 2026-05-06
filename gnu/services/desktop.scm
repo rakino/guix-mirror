@@ -2586,7 +2586,6 @@ rules."
     (map (lambda (name)
            ((package-direct-input-selector name) plasma-plasma))
          '("bolt"                ;for plasma-thunderbolt
-           "fwupd"               ;for kinfocenter and discover
            "kde-inotify-survey"
            "kdeplasma-addons"
            "kinfocenter"
@@ -2607,7 +2606,6 @@ rules."
     (map (lambda (name)
            ((package-direct-input-selector name) plasma-plasma))
          '("bolt"                ;for plasma-thunderbolt
-           "fwupd"               ;for kinfocenter and discover
            "kde-inotify-survey"
            "kdeplasma-addons"
            "kinfocenter"
@@ -2628,8 +2626,7 @@ hardware files."
   (let ((plasma-plasma (plasma-package config)))
     (map (lambda (name)
            ((package-direct-input-selector name) plasma-plasma))
-         '("bolt"      ;for plasma-thunderbolt
-           "fwupd")))) ;for kinfocenter and discover
+         '("bolt")))) ;for plasma-thunderbolt
 
 ;; see https://bugs.kde.org/show_bug.cgi?id=456210
 ;; if `kde' no exits, fallback to `other', and then unlock lockscreen not work,
