@@ -54,3 +54,6 @@
 
 (define-public gcc-cross-x86_64-pc-gnu-toolchain
   (cross-gcc-toolchain "x86_64-pc-gnu"))
+
+(define-public gcc-cross-powerpc64le-linux-gnu-toolchain
+  (cross-gcc-toolchain "powerpc64le-linux-gnu"))
