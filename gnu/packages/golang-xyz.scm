@@ -32880,6 +32880,30 @@ globs from things like your .gitignore file, and zsh.  The \"**\" glob
 represents a recursive wildcard matching zero-or-more directory levels deep.")
     (license license:expat)))
 
+(define-public go-github-com-yashtewari-glob-intersection
+  (package
+    (name "go-github-com-yashtewari-glob-intersection")
+    (version "0.2.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/yashtewari/glob-intersection")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1sw3dag2qwx14z0pj1l0v33majk82s1vx9fsnjr3l69dq7jf212b"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/yashtewari/glob-intersection"))
+    (home-page "https://github.com/yashtewari/glob-intersection")
+    (synopsis "Go library for checking Non-empty glob Regexp")
+    (description
+     "This package provides methods to check whether the intersection of
+several globs matches a non-empty set of strings.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-yaslama-go-wayland-wayland
   (let ((commit "2874f32d9c34a7a3f099043a6ca44dda9898a2c9")
         (revision "0"))
