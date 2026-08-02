@@ -1,5 +1,6 @@
 ;;; GNU Guix --- Functional package management for GNU
 ;;; Copyright © 2026 Arthur Rodrigues <arthurhdrodrigues@proton.me>
+;;; Copyright © 2026 moksh <mysticmoksh@riseup.net>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -146,7 +147,7 @@ tree for exported @acronym{CustomResourceDefinition, CRD} types.")
     (arguments
      (list
       ;; TODO: Tests a shaky and fail a lot, check how run unittests.
-      #:tests? #f 
+      #:tests? #f
       #:import-path "go.etcd.io/etcd/client/v3"
       #:unpack-path "go.etcd.io/etcd"))
     (native-inputs
@@ -550,6 +551,38 @@ Kubernetes-style API types}.")
     (synopsis "Kubernetes core components Golang source code")
     (description
      "This package contains shared code for Kubernetes core components.")
+    (license license:asl2.0)))
+
+(define-public go-k8s-io-kubelet
+  (package
+    (name "go-k8s-io-kubelet")
+    (version "0.36.3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/kubernetes/kubelet")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0n9f79yvk1gly15ach4l5wfxy9wwq5zj3qrgr57893zizyqrpn5i"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "k8s.io/kubelet"))
+    (native-inputs
+     (list go-github-com-stretchr-testify))
+    (propagated-inputs
+     (list go-google-golang-org-grpc
+           go-google-golang-org-protobuf
+           go-k8s-io-api
+           go-k8s-io-apimachinery
+           go-k8s-io-component-base))
+    (home-page "https://k8s.io/kubelet")
+    (synopsis "Kubelet component configs")
+    (description
+     "This package provides external, versioned ComponentConfig API types for
+configuring the kubelet.")
     (license license:asl2.0)))
 
 (define-public go-sigs-k8s-io-apiserver-network-proxy-konnectivity-client
