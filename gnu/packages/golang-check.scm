@@ -2144,6 +2144,32 @@ e.g. @code{repr} in Python.")
     (license (list license:asl2.0
                    license:expat))))
 
+(define-public go-github-com-huandu-go-assert
+  (package
+    (name "go-github-com-huandu-go-assert")
+    (version "1.1.6")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/huandu/go-assert")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1a6plaj8vjwszflkvqvk3d37sszbqjpd7i85ddn704f1bpxn67nf"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/huandu/go-assert"))
+    (propagated-inputs
+     (list go-github-com-davecgh-go-spew))
+    (home-page "https://github.com/huandu/go-assert")
+    (synopsis "Assert macros for Go")
+    (description
+     "Thip package provides a way to assert expression and output useful
+contextual information automatically when a case fails.")
+    (license license:expat)))
+
 (define-public go-github-com-hydrogen18-memlistener
   (package
     (name "go-github-com-hydrogen18-memlistener")
