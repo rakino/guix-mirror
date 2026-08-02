@@ -14284,6 +14284,34 @@ execution.")
      "The chardet package ports character set detection from ICU to Go.")
     (license license:expat)))
 
+(define-public go-github-com-gohugoio-hashstructure
+  (package
+    (name "go-github-com-gohugoio-hashstructure")
+    (version "1.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/gohugoio/hashstructure")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "08fbw4klhyn0l92qkxvzw70k2avc2025ln730clg7d4lxy0l1vv9"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/gohugoio/hashstructure"))
+    (native-inputs
+     (list go-github-com-frankban-quicktest))
+    (propagated-inputs
+     (list go-github-com-cespare-xxhash-v2))
+    (home-page "https://github.com/gohugoio/hashstructure")
+    (synopsis "Go library for creating a unique hash value")
+    (description
+     "hashstructure is a Go library for creating a unique hash value for
+arbitrary values in Go.")
+    (license license:expat)))
+
 (define-public go-github-com-golang-freetype
   (package
     (name "go-github-com-golang-freetype")
