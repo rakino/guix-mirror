@@ -26978,6 +26978,37 @@ language.  It offers a straightforward interface for interacting with Redis
 servers.")
     (license license:bsd-2)))
 
+(define-public go-github-com-reeflective-readline
+  (package
+    (name "go-github-com-reeflective-readline")
+    (version "1.3.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/reeflective/readline")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "14hxb7d52z9x9bjc0fl4slh2ffr1xfjmpmcxmgsckhck31kazb33"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/reeflective/readline"))
+    (propagated-inputs
+     (list go-github-com-creack-pty
+           go-github-com-hinshun-vt10x
+           go-github-com-rivo-uniseg
+           go-golang-org-x-sys))
+    (home-page "https://github.com/reeflective/readline")
+    (synopsis "Readline shell implementation for Go")
+    (description
+     "Package readline provides a modern, pure Go @code{readline} shell
+implementation,with full @code{.inputrc} and legacy readline command/option
+support, and extended with various commands,options and tools commonly found
+in more modern shells.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-reiver-go-porterstemmer
   ;; The latest commit contain test fixtures.
   (let ((commit "ab0f922907ea0321367a5776bd7a6c35d505d53b")
