@@ -16007,6 +16007,163 @@ DB files retrieved from CURL.")
 github.com/ooni/probe-cli.")
     (license license:gpl3)))
 
+(define-public go-github-com-open-policy-agent-opa
+  (package
+    (name "go-github-com-open-policy-agent-opa")
+    (version "1.19.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/open-policy-agent/opa")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1c9n0fzx70081cyccyajwhdchh5rmap9hxf7vaz9gg4pjf4c4w00"))
+       (modules '((guix build utils)))
+       (snippet
+        #~(begin
+            ;; Submodules with their own go.mod files and packaged separately.
+            (delete-file-recursively "build/tools")
+            (delete-file-recursively "e2e")
+            ;; Exit status 1 when run tests.
+            (for-each delete-file-recursively
+                      (list "v1/test/e2e/authz"
+                            "v1/test/e2e/certrefresh"
+                            "v1/test/e2e/concurrency"
+                            "v1/test/e2e/diagnostics"
+                            "v1/test/e2e/distributedtracing"
+                            "v1/test/e2e/h2c"
+                            "v1/test/e2e/http"
+                            "v1/test/e2e/logs/console"
+                            "v1/test/e2e/metrics"
+                            "v1/test/e2e/shutdown"
+                            "v1/test/e2e/tls"))))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:skip-build? #t
+      #:import-path "github.com/open-policy-agent/opa"
+      #:embed-files
+      #~(list "prelude.graphql"
+              ;; For go-github-com-santhosh-tekuri-jsonschema-v6:
+              "applicator"
+              "content"
+              "core"
+              "format"
+              "format-annotation"
+              "format-assertion"
+              "meta-data"
+              "schema"
+              "unevaluated"
+              "validation")
+      #:test-flags
+      #~(list "-short"
+              "-skip" (string-join
+                       ;; Skip benchmark and tests requiring network access.
+                       (list ".*Bench.*"
+                             "Test405StatusCodev0"
+                             "Test405StatusCodev1"
+                             "TestAuthorization"
+                             "TestAuthorizationUsesInterQueryCache"
+                             "TestBadQueryV1"
+                             "TestBufferedLoggerIntegration"
+                             "TestBundleNoRoots"
+                             "TestBundleScope"
+                             "TestBundleScopeMultiBundle"
+                             "TestCertPoolReloading"
+                             "TestCompile.*"
+                             "TestConfigV1"
+                             "TestConfigV1WithInvalidConfig"
+                             "TestCustom.*"
+                             "TestData.*"
+                             "TestDataYAML"
+                             "TestDecisionIDs"
+                             "TestDecisionLog.*"
+                             "TestDiagnosticRoutes"
+                             "TestEnable.*"
+                             "TestExtraAuthorizerRoutes"
+                             "TestExtraMiddleware"
+                             "TestOTLP.*"
+                             "TestPolicies.*"
+                             "TestPostPartialChecks"
+                             "TestQuery.*"
+                             "TestRequest.*"
+                             "TestRunServer.*"
+                             "TestSSOCredentialService"
+                             "TestServerReloadTrigger"
+                             "TestSocketHTTPGetRequest"
+                             "TestStatusV1"
+                             "TestStatusV1MetricsWithSystemAuthzPolicy"
+                             "TestUnversionedGet.*"
+                             "TestUnversionedPost"
+                             "TestV1Pretty")
+                       "|"))))
+    (native-inputs
+     (list go-github-com-google-go-cmp
+           go-github-com-spf13-cobra
+           go-github-com-spf13-pflag
+           go-github-com-spf13-viper))
+    (propagated-inputs
+     (list go-github-com-agnivade-levenshtein
+           go-github-com-cespare-xxhash-v2
+           go-github-com-dgraph-io-badger-v4
+           go-github-com-fortytw2-leaktest
+           go-github-com-foxcpp-go-mockdns
+           go-github-com-fsnotify-fsnotify
+           go-github-com-go-logr-logr
+           go-github-com-gobwas-glob
+           go-github-com-google-uuid
+           go-github-com-hashicorp-golang-lru-v2
+           go-github-com-huandu-go-sqlbuilder
+           go-github-com-lestrrat-go-jwx-v3
+           go-github-com-olekukonko-tablewriter
+           go-github-com-opencontainers-go-digest
+           go-github-com-opencontainers-image-spec
+           go-github-com-prometheus-client-golang
+           go-github-com-prometheus-client-model
+           go-github-com-rcrowley-go-metrics
+           go-github-com-reeflective-readline
+           go-github-com-santhosh-tekuri-jsonschema-v6
+           go-github-com-sergi-go-diff
+           go-github-com-sirupsen-logrus
+           go-github-com-tchap-go-patricia-v2
+           go-github-com-tetratelabs-wazero
+           go-github-com-vektah-gqlparser-v2
+           go-github-com-xeipuuv-gojsonreference
+           go-github-com-yashtewari-glob-intersection
+           go-go-opentelemetry-io-contrib-bridges-prometheus
+           go-go-opentelemetry-io-contrib-instrumentation-net-http-otelhttp
+           go-go-opentelemetry-io-otel
+           go-go-opentelemetry-io-otel-exporters-otlp-otlpmetric-otlpmetricgrpc
+           go-go-opentelemetry-io-otel-exporters-otlp-otlpmetric-otlpmetrichttp
+           go-go-opentelemetry-io-otel-exporters-otlp-otlptrace
+           go-go-opentelemetry-io-otel-exporters-otlp-otlptrace-otlptracegrpc
+           go-go-opentelemetry-io-otel-exporters-otlp-otlptrace-otlptracehttp
+           go-go-opentelemetry-io-otel-sdk
+           go-go-opentelemetry-io-otel-sdk-metric
+           go-go-opentelemetry-io-otel-trace
+           go-go-opentelemetry-io-proto-otlp
+           go-go-yaml-in-yaml-v3
+           go-golang-org-x-sync
+           go-golang-org-x-term
+           go-golang-org-x-text
+           go-golang-org-x-time
+           go-google-golang-org-grpc
+           go-google-golang-org-protobuf
+           go-gopkg-in-check-v1
+           go-gopkg-in-ini-v1
+           go-gopkg-in-natefinch-lumberjack-v2
+           go-oras-land-oras-go-v2
+           go-sigs-k8s-io-yaml))
+    (home-page "https://github.com/open-policy-agent/opa")
+    (synopsis "General purpose policy engine")
+    (description
+     "Open Policy Agent (OPA) is an open source, general-purpose policy engine
+that enables unified, context-aware policy enforcement across the entire
+stack.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-openfga-go-sdk
   (package
     (name "go-github-com-openfga-go-sdk")
