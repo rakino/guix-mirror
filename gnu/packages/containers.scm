@@ -133,6 +133,60 @@
 archives as created by Podman, CRI-O and containerd.")
     (license license:asl2.0)))
 
+(define-public go-github-com-containerd-accelerated-container-image
+  (package
+    (name "go-github-com-containerd-accelerated-container-image")
+    (version "1.4.3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/containerd/accelerated-container-image")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "086ywdk8mnqnjj3a07ggcyf52cqqsr8cbx2iw2qrncd1slb9l0vv"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:skip-build? #t
+      #:import-path "github.com/containerd/accelerated-container-image"
+      ;; TODO: Remove when all transitive inputs are packaged.
+      #:test-subdirs #~(list "cmd/convertor/builder")))
+    (native-inputs
+     (list go-github-com-containerd-log
+           go-github-com-prometheus-client-golang
+           go-github-com-sirupsen-logrus
+           go-github-com-spf13-cobra
+           go-github-com-urfave-cli-v2))
+    (propagated-inputs
+     (list go-github-com-containerd-containerd-api
+           go-github-com-containerd-containerd-v2
+           go-github-com-containerd-continuity
+           go-github-com-containerd-errdefs
+           go-github-com-containerd-go-cni
+           go-github-com-containerd-platforms
+           go-github-com-data-accelerator-zdfs
+           go-github-com-docker-go-units
+           go-github-com-go-sql-driver-mysql
+           go-github-com-moby-locker
+           go-github-com-moby-sys-mountinfo
+           go-github-com-opencontainers-go-digest
+           go-github-com-opencontainers-image-spec
+           go-github-com-opencontainers-runtime-spec
+           go-golang-org-x-sync
+           go-golang-org-x-sys
+           go-google-golang-org-grpc
+           go-oras-land-oras-go-v2))
+    (home-page "https://github.com/containerd/accelerated-container-image")
+    (synopsis "Remote container image format")
+    (description
+     "Accelerated Container Image is an implementation of paper
+@url{https://www.usenix.org/conference/atc20/presentation/li-huiba, DADI:
+Block-Level Image Service for Agile and Elastic Application Deployment. USENIX
+ATC'20}.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-containerd-accelerated-container-image-pkg-types
   ;; Submodule to break cycle in github.com/data-accelerator/zdfs.
   (hidden-package
