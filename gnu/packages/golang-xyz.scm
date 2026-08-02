@@ -30885,6 +30885,49 @@ setmode and getmode which can be used to modify the mode bits of an
 chmod command.")
     (license license:bsd-2)))
 
+(define-public go-github-com-tonistiigi-fsutil
+  (package
+    (name "go-github-com-tonistiigi-fsutil")
+    (version "0.0.0-20260819142231-83cac42c1c52")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/tonistiigi/fsutil")
+              (commit (go-version->git-ref version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1h1mhvqg9nvbhczjqkmhsihfvd4dpgs5v8w0hfx6fqgrhlacc73g"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/tonistiigi/fsutil"
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'remove-benchmarks
+            (lambda* (#:key import-path #:allow-other-keys)
+              (with-directory-excursion (string-append "src/" import-path)
+                (delete-file-recursively "bench")))))))
+    (native-inputs
+     (list go-github-com-stretchr-testify))
+    (propagated-inputs
+     (list go-github-com-containerd-continuity
+           ;; go-github-com-microsoft-go-winio  ;Windows only
+           go-github-com-moby-patternmatcher
+           go-github-com-opencontainers-go-digest
+           go-github-com-pkg-errors
+           go-github-com-planetscale-vtprotobuf
+           go-github-com-tonistiigi-dchapes-mode
+           go-golang-org-x-sync
+           go-golang-org-x-sys
+           go-google-golang-org-protobuf))
+    (home-page "https://github.com/tonistiigi/fsutil")
+    (synopsis "Incremental file directory sync")
+    (description
+     "This package provides tools for Incremental file directory sync in
+Golang.")
+    (license license:expat)))
+
 (define-public go-github-com-tonistiigi-go-archvariant
   (package
     (name "go-github-com-tonistiigi-go-archvariant")
