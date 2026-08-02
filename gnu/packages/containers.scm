@@ -526,6 +526,40 @@ It can be used with QEMU, Hyperkit, Hyper-V and User-Mode Linux.
 The binary is called @command{gvproxy}.")
     (license license:asl2.0)))
 
+(define-public go-github-com-data-accelerator-zdfs
+  (package
+    (name "go-github-com-data-accelerator-zdfs")
+    (version "0.1.5")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/data-accelerator/zdfs")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0j2xr9li2qciqdi6is82aw3fx1lm673bfddgfg3zhbpx3r95mwsy"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/data-accelerator/zdfs"))
+    (native-inputs
+     (list go-github-com-stretchr-testify
+           go-github-com-containerd-accelerated-container-image-pkg-types))
+    (propagated-inputs
+     (list go-github-com-containerd-containerd-v2
+           go-github-com-containerd-continuity
+           go-github-com-distribution-reference
+           go-github-com-pkg-errors
+           go-github-com-sirupsen-logrus))
+    (home-page "https://github.com/data-accelerator/zdfs")
+    (synopsis "Extension package of Overlaybd-snapshotter")
+    (description
+     "This package provides an extension overlaybd-snapshotter.  It constructs
+the overlaybd image in OCIv1 tgz format through a tricky method which makes
+'overlaybd-snapshotter' adapter for a normal OCIv1 image.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-opencontainers-image-spec-schema
   (package
     (name "go-github-com-opencontainers-image-spec-schema")
