@@ -487,6 +487,76 @@ storage, container execution and supervision, low-level storage and network
 attachments, etc.")
     (license license:asl2.0)))
 
+(define-public go-github-com-containerd-stargz-snapshotter
+  (package
+    (name "go-github-com-containerd-stargz-snapshotter")
+    (version "0.18.2")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/containerd/stargz-snapshotter")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "06nksi5xpbys6bfqsfm7bax9lxnwynl7y3hw6pcxhv5hckxnb8fp"))
+       (modules '((guix build utils)))
+       (snippet
+        #~(begin
+            ;; Submodules with their own go.mod files and packaged separately:
+            (delete-file-recursively "cmd")
+            (delete-file-recursively "estargz")
+            (delete-file-recursively "ipfs")))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:skip-build? #t
+      #:import-path "github.com/containerd/stargz-snapshotter"
+      ;; TODO: Remove when all transitive inputs are packaged.
+      #:test-subdirs
+      #~(list "fs" "task" "cache" "estargz" "fs/layer" "fs/reader"
+              "fs/remote" "util/cacheutil" "metadata/memory"
+              "analyzer/recorder" "estargz/errorutil" "estargz/externaltoc"
+              "estargz/zstdchunked" "util/decompressutil")))
+    (propagated-inputs
+     (list go-github-com-containerd-console
+           go-github-com-containerd-containerd-v2
+           go-github-com-containerd-continuity
+           go-github-com-containerd-errdefs
+           go-github-com-containerd-log
+           go-github-com-containerd-platforms
+           go-github-com-containerd-plugin
+           go-github-com-distribution-reference
+           go-github-com-docker-cli
+           go-github-com-docker-go-metrics
+           go-github-com-gogo-protobuf
+           go-github-com-golang-groupcache
+           go-github-com-hanwen-go-fuse-v2
+           go-github-com-hashicorp-go-retryablehttp
+           go-github-com-klauspost-compress
+           go-github-com-moby-sys-mountinfo
+           go-github-com-opencontainers-go-digest
+           go-github-com-opencontainers-image-spec
+           go-github-com-opencontainers-runtime-spec
+           go-github-com-prometheus-client-golang
+           go-github-com-rs-xid
+           go-github-com-sirupsen-logrus
+           go-go-etcd-io-bbolt
+           go-golang-org-x-sync
+           go-golang-org-x-sys
+           go-google-golang-org-grpc
+           go-k8s-io-api
+           go-k8s-io-apimachinery
+           go-k8s-io-client-go
+           go-k8s-io-cri-api))
+    (home-page "https://github.com/containerd/stargz-snapshotter")
+    (synopsis "Fast container image distribution plugin with lazy pulling")
+    (description
+     "This package provides a container image distribution plugin with lazy
+pulling for Containerd implemented in @code{eStargz} - Standard-Compatible
+Extensions to Tar.gz Layers for Lazy Pulling Container Images.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-containers-gvisor-tap-vsock
   (package
     (name "go-github-com-containers-gvisor-tap-vsock")
