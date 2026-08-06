@@ -835,6 +835,40 @@ names of block storage devices backing the requested file paths.")
 promlint.")
     (license license:asl2.0)))
 
+(define-public go-go-opentelemetry-io-contrib-bridges-prometheus
+  (package
+    (name "go-go-opentelemetry-io-contrib-bridges-prometheus")
+    (version "0.69.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/open-telemetry/opentelemetry-go-contrib")
+              (commit (go-version->git-ref version
+                                           #:subdir "bridges/prometheus"))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1bm680k5ckpzjpsqzxswsylc9gxiw2flwkjlwmvh6hs50bgbpyjl"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "go.opentelemetry.io/contrib/bridges/prometheus"
+      #:unpack-path "go.opentelemetry.io/contrib"))
+    (native-inputs
+     (list go-github-com-stretchr-testify))
+    (propagated-inputs
+     (list go-github-com-prometheus-client-golang
+           go-github-com-prometheus-client-model
+           go-go-opentelemetry-io-otel
+           go-go-opentelemetry-io-otel-sdk
+           go-go-opentelemetry-io-otel-sdk-metric))
+    (home-page "https://go.opentelemetry.io/contrib")
+    (synopsis "Bridge from Prometheus to OpenTelemetry")
+    (description
+     "Package prometheus provides a bridge from Prometheus to
+@code{OpenTelemetry}.")
+    (license license:asl2.0)))
+
 ;;;
 ;;; Executables:
 ;;;
