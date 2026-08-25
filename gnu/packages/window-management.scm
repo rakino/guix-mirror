@@ -192,6 +192,7 @@
   #:use-module (gnu packages rust-apps)
   #:use-module (gnu packages serialization)
   #:use-module (gnu packages sphinx)
+  #:use-module (gnu packages sqlite)
   #:use-module (gnu packages stb)
   #:use-module (gnu packages suckless)
   #:use-module (gnu packages texinfo)
@@ -3374,6 +3375,42 @@ works on Wayland compositors supporting the wlr-layer-shell protocol.")
     (synopsis "Screen wallpaper utility for Wayland compositors")
     (description "Swaybg is a wallpaper utility for Wayland compositors.")
     (license license:expat))) ; MIT license
+
+(define-public swayclip
+  (package
+    (name "swayclip")
+    (version "0.3.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/64-bitman/swayclip")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0cdn4fmy0kwcaisaaizfjk10isd7gk0dlnrpxl5mp4r1h99jkf7y"))))
+    (build-system meson-build-system)
+    (arguments
+     (list
+      #:phases
+      #~(modify-phases %standard-phases
+          (add-after 'unpack 'unbundle-xstructs
+            (lambda* _
+              (substitute* "meson.build"
+                (("(xstructs_dep = ).*'\\)" all first)
+                 (string-append
+                  first
+                  "dependency('xstructs', version: '>=1.0')"))))))))
+    (native-inputs (list cmake-minimal pkg-config scdoc xstructs))
+    (inputs (list json-c sqlite wayland))
+    (home-page "https://github.com/64-bitman/swayclip")
+    (synopsis "Clipboard manager for Wayland compositors")
+    (description
+     "@code{swayclip} is a lightweight and fast clipboard manager for
+Wayland compositors, featuring persistent history, multi-seat support,
+IPC controllability, and compatibility with any clipboard format,
+including multimedia.")
+    (license license:gpl3+)))
 
 (define-public awww
   (package
