@@ -2094,6 +2094,56 @@ Linear Congruential Generator (LCG) with a permutation function to increase
 output randomness while retaining speed, simplicity, and conciseness.")
       (license (list license:expat license:asl2.0))))) ; dual licensed
 
+(define-public xstructs
+  ;; Project has no release, using latest commit and 1.0 base version
+  ;; as showed on meson.build.
+  (let ((commit "c987a686b8b03777e9177df9e9d589a5b16b7bb9")
+        (revision "0"))
+    (package
+      (name "xstructs")
+      (version (git-version "1.0.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/64-bitman/xstructs")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1mr6f8yj1dgap47l1sslbnjw5qhd9rz9sbkdsd2lbd1rqzvn5c9v"))))
+      (build-system meson-build-system)
+      (arguments
+       (list
+        #:phases
+        #~(modify-phases %standard-phases
+            (add-after 'install 'install-headers-and-pc
+              (lambda _
+                (let ((include-dir (string-append #$output "/include"))
+                      (pkgconfig (string-append #$output "/lib/pkgconfig")))
+                  (chdir "../source")
+                  (install-file "xarray.h" include-dir)
+                  (install-file "xlist.h" include-dir)
+                  (with-output-to-file "xstructs.pc"
+                    (lambda ()
+                      (format #t "\
+prefix=~a
+includedir=${prefix}/include
+
+Name: xstructs
+Description: Xstructs provides data structures: array and linked list.
+Version: 1.0
+Cflags: -I${includedir}
+" #$output)))
+                  (install-file "xstructs.pc" pkgconfig))))
+            (add-after 'install 'install-source
+              (lambda _
+                (copy-recursively #$source (string-append #$output "/xstructs")))))))
+      (home-page "https://github.com/64-bitman/xstructs")
+      (synopsis "Typed data structures")
+      (description
+       "Xstructs provides some typed generic data structures: array and linked list.")
+      (license license:unlicense))))
+
 (define-public yyjson
   (package
     (name "yyjson")
