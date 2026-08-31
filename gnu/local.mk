@@ -1434,6 +1434,7 @@ dist_patch_DATA =						\
   %D%/packages/patches/gcc-13.2.0-libstdc++-docbook-xsl-uri.patch	\
   %D%/packages/patches/gcc-13.2.0-libstdc++-info-install-fix.patch	\
   %D%/packages/patches/gcolor3-update-libportal-usage.patch	\
+  %D%/packages/patches/gcr-3-suppress-debug-messages.patch	\
   %D%/packages/patches/gd-fix-tests-on-i686.patch		\
   %D%/packages/patches/gd-brect-bounds.patch			\
   %D%/packages/patches/gdb-hurd64.patch				\

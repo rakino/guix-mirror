@@ -2411,7 +2411,8 @@ GNOME Desktop.")
                                   name "-" version ".tar.xz"))
               (sha256
                (base32
-                "1dqsgrb62fgmy4w63bjl3b525nil4idrrdcscia1h3isaly0zlds"))))
+                "1dqsgrb62fgmy4w63bjl3b525nil4idrrdcscia1h3isaly0zlds"))
+              (patches (search-patches "gcr-3-suppress-debug-messages.patch"))))
     (arguments
      (substitute-keyword-arguments arguments
        ((#:phases phases)
