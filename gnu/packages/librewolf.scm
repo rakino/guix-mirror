@@ -111,7 +111,6 @@
           (commit version)
           (recursive? #t)))
     (file-name (git-file-name "librewolf-source" version))
-    (patches (search-patches "librewolf-neuter-locale-download.patch"))
     (sha256 (base32 hash))))
 
 (define computed-origin-method (@@ (guix packages) computed-origin-method))
@@ -126,14 +125,14 @@
   ;; tar xf /gnu/store/...-firefox-123.4.source.tar.xz --wildcards -O \
   ;;     firefox-*/browser/locales/l10n-changesets.json \
   ;;     | grep revision | sort | uniq
-  (let ((commit "25feb12abf0f49b24210a9a6b76dcd4bca9d05bb"))
+  (let ((commit "a0ca3bf67a883f206ab85c6527d767b3b54675ad"))
    (origin
       (method git-fetch)
       (uri (git-reference
             (url "https://github.com/mozilla-l10n/firefox-l10n.git")
             (commit commit)))
       (file-name (git-file-name "firefox-l10n" commit))
-      (sha256 (base32 "11g5k7frjmkrg2qvhf33a27dz5pj0hi5m0bnvarc83qdwdxh3s8d")))))
+      (sha256 (base32 "1ard1gmi0bbmcjraa523r2kwh00hfkzlyr41ch6ngwl5gnns12z3")))))
 
 (define* (make-librewolf-source #:key version firefox-hash librewolf-hash l10n)
   (let* ((ff-src (firefox-source-origin
@@ -191,6 +190,7 @@
                  (("if [ -f pk.asc ].*") ""))
 
                ;; Stage locales.
+               (setenv "SKIP_FETCHING_LOCALES" "true")
                (begin
                  (substitute* "scripts/librewolf-patches.py"
                    (("l10n_dir = Path(\"..\", \"l10n\")")
@@ -214,7 +214,6 @@
       (snippet
        #~(for-each delete-file-recursively
                    '("testing/web-platform"
-                     "gfx/cairo/libpixman"
                      "js/src/ctypes/libffi"
                      "ipc/chromium/src/third_party/libevent"
                      "media/libvpx"
@@ -238,24 +237,24 @@
 ;;; Using `rust' will likely lead to a newer version then listed in the table,
 ;;; but since in Guix only the latest packaged Rust is officially supported,
 ;;; it is a tradeoff worth making.
-;;; 0: https://firefox-source-docs.mozilla.org/writing-rust-code/update-policy.html
-(define rust-librewolf rust-1.94)
+;;; [0]: https://firefox-source-docs.mozilla.org/writing-rust-code/update-policy.html
+(define rust-librewolf rust-1.95)
 
 ;; Update this id with every update to its release date.
 ;; It's used for cache validation and therefore can lead to strange bugs.
 ;; ex: date '+%Y%m%d%H%M%S'
 ;; or: (format-time-string "%Y%m%d%H%M%S")
-(define %librewolf-build-id "20260818200615")
+(define %librewolf-build-id "20260903212235")
 
 (define-public librewolf
   (package
     (name "librewolf")
-    (version "154.0-2")
+    (version "155.0-1")
     (source
      (make-librewolf-source
       #:version version
-      #:firefox-hash "16mrk2s6rbdfarq5ixk67kh893srbghsxp10dn5gfq4ad2rwbkin"
-      #:librewolf-hash "1klhkgjx637r38y9d8igjy8hlhgvh5kk2arx817yyi3s773gif97"
+      #:firefox-hash "1yqdsysb05crh360jxdm4s31vh9q49wd5slbyv3vkigq6ncdazy5"
+      #:librewolf-hash "02nv16hmi84pqlr14x83i5mcgv4wmmw2wyc1imz74457w8rf9wic"
       #:l10n firefox-l10n))
     (build-system gnu-build-system)
     (arguments
@@ -524,20 +523,6 @@
             (lambda* (#:key outputs #:allow-other-keys)
               (delete-file (string-append #$output
                                           "/lib/librewolf/librewolf-bin"))))
-          (add-after 'install 'wrap-glxtest
-            ;; glxtest uses dlopen() to load mesa and pci
-            ;; libs, wrap it to set LD_LIBRARY_PATH.
-            (lambda* (#:key inputs outputs #:allow-other-keys)
-              (let* ((out (assoc-ref outputs "out"))
-                     (lib (string-append out "/lib"))
-                     (libs (map
-                            (lambda (lib-name)
-                              (string-append (assoc-ref inputs
-                                                        lib-name)
-                                             "/lib"))
-                            '("mesa" "pciutils"))))
-                (wrap-program (car (find-files lib "^glxtest$"))
-                  `("LD_LIBRARY_PATH" prefix ,libs)))))
           (add-after 'install 'wrap-program
             (lambda* (#:key inputs outputs #:allow-other-keys)
               ;; The following two functions are from Guix's icecat package in
