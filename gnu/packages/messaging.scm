@@ -1208,7 +1208,7 @@ basic IRC protocol, CTCP, and DCC connections.")
 (define-public python-nbxmpp
   (package
     (name "python-nbxmpp")
-    (version "7.3.0")
+    (version "7.4.0")
     (source
      (origin
        (method git-fetch)
@@ -1217,7 +1217,7 @@ basic IRC protocol, CTCP, and DCC connections.")
               (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0ywrkzxnr575k8zmzcnaf17sp89dy8br1xndm4k94b1vk1kq5iaj"))))
+        (base32 "0xn0qm0bmvvb3fg7dwkapnicwxp265qbd7rm1rawighv8la923ay"))))
     (build-system pyproject-build-system)
     (arguments (list #:test-backend #~'unittest))
     (propagated-inputs
