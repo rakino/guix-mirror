@@ -46,7 +46,7 @@
 ;;; Copyright © 2024 Nguyễn Gia Phong <cnx@loang.net>
 ;;; Copyright © 2025 Evgeny Pisemsky <mail@pisemsky.site>
 ;;; Copyright © 2025 Janneke Nieuwenhuizen <janneke@gnu.org>
-;;; Copyright © 2025 Adrien 'neox' Bourmault <neox@gnu.org>
+;;; Copyright © 2025, 2026 Adrien 'neox' Bourmault <neox@gnu.org>
 ;;; Copyright © 2026 orahcio <orahcio@gmail.com>
 ;;; Copyright © 2026 Sughosha <sughosha@disroot.org>
 ;;; Copyright © 2026 Tomás Ortín Fernández (quanrong) <quanrong@mailbox.org>
@@ -1241,7 +1241,7 @@ of xmpppy.")
 (define-public gajim
   (package
     (name "gajim")
-    (version "2.5.0")
+    (version "2.6.0")
     (source
      (origin
        (method url-fetch)
@@ -1249,7 +1249,7 @@ of xmpppy.")
                            (version-major+minor version)
                            "/gajim-" version ".tar.gz"))
        (sha256
-         (base32 "1q7pg604d92v9ra6c6njkvc6mrhpfv65akmax5f6bmk3fhvrfa9l"))
+         (base32 "0bnfjm7yn1r80nq8i0nwdfwijh7i9m7nijm631mfk9gzv8fpv32d"))
        (patches
          (search-patches "gajim-honour-GAJIM_PLUGIN_PATH.patch"))))
     (build-system pyproject-build-system)
