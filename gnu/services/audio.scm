@@ -237,23 +237,8 @@
 
 ;;; TODO: Procedures for deprecated fields, to be removed.
 
-(define mpd-deprecated-fields '((music-dir . music-directory)
-                                (playlist-dir . playlist-directory)
-                                (address . endpoints)))
-
 (define (port? value) (or (string? value) (integer? value)))
 
-(define (mpd-serialize-deprecated-field field-name value)
-  (if (maybe-value-set? value)
-      (begin
-        (warn-about-deprecation
-         field-name #f
-         #:replacement (assoc-ref mpd-deprecated-fields field-name))
-        (match field-name
-          ('playlist-dir (mpd-serialize-string "playlist_directory" value))
-          ('music-dir (mpd-serialize-string "music_directory" value))
-          ('address (mpd-serialize-string "bind_to_address" value))))
-      ""))
 
 (define (mpd-serialize-port field-name value)
   (when (string? value)
@@ -489,19 +474,9 @@ The available values, in decreasing order of verbosity, are: @code{verbose},
    maybe-string
    "The directory to scan for music files.")
 
-  (music-dir ; TODO: deprecated, remove later
-   maybe-string
-   "The directory to scan for music files."
-   (serializer mpd-serialize-deprecated-field))
-
   (playlist-directory
    maybe-string
    "The directory to store playlists.")
-
-  (playlist-dir ; TODO: deprecated, remove later
-   maybe-string
-   "The directory to store playlists."
-   (serializer mpd-serialize-deprecated-field))
 
   (db-file
    maybe-string
@@ -533,12 +508,6 @@ can be specified here."
       (if (maybe-value-set? endpoints)
           (mpd-serialize-list-of-strings "bind_to_address" endpoints)
           ""))))
-
-  (address ; TODO: deprecated, remove later
-   maybe-string
-   "The address that mpd will bind to.
-To use a Unix domain socket, an absolute path can be specified here."
-   (serializer mpd-serialize-deprecated-field))
 
   (database
    maybe-mpd-plugin
