@@ -41813,11 +41813,6 @@ The MPD package.
 @item @code{user} (type: user-account)
 The user to run mpd as.
 
-@item @code{group} (type: user-group)
-The group to run mpd as.
-
-The default @code{%mpd-group} is a system group with name ``mpd''.
-
 @item @code{shepherd-requirement} (default: @code{'()}) (type: list-of-symbols)
 A list of symbols naming Shepherd services that this service
 will depend on.
