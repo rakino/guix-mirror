@@ -622,7 +622,9 @@ appended to the configuration.")
                  #:environment-variables
                  ;; Set HOME so MPD can infer default paths, such as
                  ;; for the database file.
-                 (cons (string-append "HOME=" home)
+                 (cons* (string-append "HOME=" home)
+                        "SSL_CERT_DIR=/run/current-system/profile/etc/ssl/certs"
+                        "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
                        '#$environment-variables))))))
        (stop  #~(make-kill-destructor))
        (actions
