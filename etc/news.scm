@@ -43,7 +43,22 @@
 
 (channel-news
  (version 0)
+ (entry (commit "e788997691c524755f64fa853abf6ac2c36d8107")
+        (title
+         (en "Deprecation changes in ``mpd-configuration''"))
+        (body
+         (en "The deprecated ``music-dir'', ``playlist-dir'', and ``address''
+fields in ``mpd-configuration'' have been removed.  Configurations still using
+these fields will need to switch to ``music-directory'',
+``playlist-directory'', and ``endpoints'' fields instead.
 
+The ``group'' field is now deprecated, and no longer serializes to the
+configuration file.  If set in a configuration, it will now print a
+deprecation warning.  Group membership may be controlled by supplying a
+user-account in the ``user'' field.  Use of the ``group'' configuration option
+@url{https://mpd.readthedocs.io/en/stable/mpd.conf.5.html#confval-group, is
+strongly discouraged by upstream}, however, it may still be set in
+``extra-options'' if needed.")))
  (entry (commit "9a18a7e9e06ad01badbb799d0cf671a0be32b85a")
         (title
          (en "Linux-libre 7.1 is deprecated")
@@ -63,7 +78,6 @@ https://www.kernel.org/category/releases.html
 
 A última versão suportada é a 7.1.13.  Por favor cogite mudar para a versão
 7.2 do Linux-libre, ou para um lançamento de suporte estandido como o 6.18.")))
-
  (entry (commit "e27f3d9d92115a1805b306f7555acfac36be660a")
         (title
          (en "GNOME 49 is now available")
