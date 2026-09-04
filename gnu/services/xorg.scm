@@ -1398,6 +1398,10 @@ polkit.addRule(function(action, subject) {
 });~%"))))))))
         '())))
 
+(define (gdm-profile config)
+  (cons gnome-shell
+        (gdm-configuration-gnome-shell-assets config)))
+
 (define gdm-service-type
   (handle-xorg-configuration gdm-configuration
     (service-type (name 'gdm)
@@ -1413,7 +1417,7 @@ polkit.addRule(function(action, subject) {
                          (service-extension polkit-service-type
                                             gdm-polkit-rules)
                          (service-extension profile-service-type
-                                            gdm-configuration-gnome-shell-assets)
+                                            gdm-profile)
                          (service-extension dbus-root-service-type
                                             (compose list
                                                      gdm-configuration-gdm))
