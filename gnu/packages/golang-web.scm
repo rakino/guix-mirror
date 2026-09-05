@@ -4883,6 +4883,24 @@ exponentially increase and stop increasing when a certain threshold is met.")
               (with-directory-excursion (string-append "src/" import-path)
                 (delete-file "example_test.go")))))))))
 
+(define-public go-github-com-cenkalti-backoff-v7
+  (package
+    (inherit go-github-com-cenkalti-backoff-v5)
+    (name "go-github-com-cenkalti-backoff-v7")
+    (version "7.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/cenkalti/backoff")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0vkbfd6qsrgi0vk243z6zci7adqrm28xx3ad8p9vxxlpg2fdhfhl"))))
+    (arguments
+     (list
+      #:import-path "github.com/cenkalti/backoff/v7"))))
+
 (define-public go-github-com-cenkalti-hub
   (package
     (name "go-github-com-cenkalti-hub")
