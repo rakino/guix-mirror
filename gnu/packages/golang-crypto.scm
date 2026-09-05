@@ -2189,6 +2189,33 @@ platforms, for a 2x speedup for IEEE CRC32 checksums.  See
 check} for information.")
     (license license:bsd-3)))
 
+(define-public go-github-com-lestrrat-go-dsig
+  (package
+    (name "go-github-com-lestrrat-go-dsig")
+    (version "1.4.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/lestrrat-go/dsig")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1s709l1irsvzm7wr2fkqhl070hrvnrnb6vhwvvfkmvssf7gcsr9q"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/lestrrat-go/dsig"))
+    (native-inputs
+     (list go-github-com-stretchr-testify))
+    (home-page "https://github.com/lestrrat-go/dsig")
+    (synopsis "Low-level Digital Signature Tools for Go")
+    (description
+     "Package dsig provides digital signature operations for Go.  It contains
+low-level signature generation and verification tools that can be used by
+other signing libraries.")
+    (license license:expat)))
+
 (define-public go-github-com-letsencrypt-pkcs11key-v4
   (package
     (name "go-github-com-letsencrypt-pkcs11key-v4")
