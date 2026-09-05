@@ -2085,16 +2085,16 @@ Hybrid Public Key Encryption} (HPKE) draft.")
 (define-public go-github-com-jphastings-jwker
   (package
     (name "go-github-com-jphastings-jwker")
-    (version "0.2.1")
+    (version "0.2.2")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/jphastings/jwker")
-             (commit (string-append "v" version))))
+              (url "https://github.com/jphastings/jwker")
+              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0nb487c2cfazxwqghq5a8iz8gyi0hhajc39c260f0n6d3ib1798g"))))
+        (base32 "0af2xpgin2b76bx48wmsph0z8rr59qm6q9r4m2w2aj9kqdp4ydcm"))))
     (build-system go-build-system)
     (arguments
      (list
