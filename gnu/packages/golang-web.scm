@@ -17751,7 +17751,7 @@ dependent.")
 (define-public go-github-com-planetscale-vtprotobuf
   (package
     (name "go-github-com-planetscale-vtprotobuf")
-    (version "0.4.0")
+    (version "0.5.0")
     (source
      (origin
        (method git-fetch)
@@ -17760,7 +17760,7 @@ dependent.")
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0qd76dcy5ij49cvrqjnbr9smfkhzrl2s9czx9kz5g3530nhrgn2s"))))
+        (base32 "0ajsz51src9k69qbaimrhqxay0ln0gy29hdlmylwbl154vq4nfnq"))))
     (build-system go-build-system)
     (arguments
      (list
@@ -17779,7 +17779,7 @@ dependent.")
     (home-page "https://github.com/planetscale/vtprotobuf")
     (synopsis "Protocol Buffers compiler for ProtoBuf APIv2 Golang code")
     (description
-     "This package provides @@code{protoc-gen-go-vtproto} plug-in for
+     "This package provides @code{protoc-gen-go-vtproto} plug-in for
 @code{protoc}, which is used by Vitess to generate optimized marshall &
 unmarshal code.")
     (license license:bsd-3)))
