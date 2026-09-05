@@ -16354,6 +16354,32 @@ This package is a Go library, for @command{evtest} and @code{uinputtest}, use
 @code{go-evdev}.")
     (license license:expat)))
 
+(define-public go-github-com-huandu-go-clone
+  (package
+    (name "go-github-com-huandu-go-clone")
+    (version "1.7.3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/huandu/go-clone")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "15lf5131m95x1s68i0hz844qaalpm61v9bywd65myqp1rfd1l352"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/huandu/go-clone"))
+    (native-inputs
+     (list go-github-com-huandu-go-assert))
+    (home-page "https://github.com/huandu/go-clone")
+    (synopsis "Clone any Go data structure deeply and thoroughly")
+    (description
+     "Package clone provides functions to deep clone any Go data.  It also
+provides a wrapper to protect a pointer from any unexpected mutation.")
+    (license license:expat)))
+
 (define-public go-github-com-huandu-xstrings
   (package
     (name "go-github-com-huandu-xstrings")
