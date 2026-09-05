@@ -2216,6 +2216,35 @@ low-level signature generation and verification tools that can be used by
 other signing libraries.")
     (license license:expat)))
 
+(define-public go-github-com-lestrrat-go-dsig-secp256k1
+  (package
+    (name "go-github-com-lestrrat-go-dsig-secp256k1")
+    (version "1.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/lestrrat-go/dsig-secp256k1")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "06i52iwvabr2sl2nfl2574cqynj55wmj93zichjiv3q7c2n659wh"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/lestrrat-go/dsig-secp256k1"))
+    (native-inputs
+     (list go-github-com-stretchr-testify))
+    (propagated-inputs
+     (list go-github-com-decred-dcrd-dcrec-secp256k1-v4
+           go-github-com-lestrrat-go-dsig))
+    (home-page "https://github.com/lestrrat-go/dsig-secp256k1")
+    (synopsis "Implementation secp256k1 for Go")
+    (description
+     "This package implements @code{secp256k1} refers to the parameters of the
+ECDSA curve used in Bitcoin.")
+    (license license:expat)))
+
 (define-public go-github-com-letsencrypt-pkcs11key-v4
   (package
     (name "go-github-com-letsencrypt-pkcs11key-v4")
