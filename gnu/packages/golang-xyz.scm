@@ -16380,6 +16380,38 @@ This package is a Go library, for @command{evtest} and @code{uinputtest}, use
 provides a wrapper to protect a pointer from any unexpected mutation.")
     (license license:expat)))
 
+(define-public go-github-com-huandu-go-sqlbuilder
+  (package
+    (name "go-github-com-huandu-go-sqlbuilder")
+    (version "1.42.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/huandu/go-sqlbuilder")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "14il349a3ybrmpk3sksryxfa8s94frl2wfjkiwgg1mrfal4r670a"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/huandu/go-sqlbuilder"))
+    (native-inputs
+     (list go-github-com-huandu-go-assert))
+    (propagated-inputs
+     (list go-github-com-huandu-go-clone
+           go-github-com-huandu-xstrings))
+    (home-page "https://github.com/huandu/go-sqlbuilder")
+    (synopsis "SQL builder for Go")
+    (description
+     "The @code{sqlbuilder} package offers a comprehensive suite of SQL string
+concatenation utilities.  It is designed to facilitate the construction of SQL
+statements compatible with Go's standard library @code{sql.DB} and
+@code{sql.Stmt} interfaces, focusing on optimizing the performance of SQL
+statement creation and minimizing memory usage.")
+    (license license:expat)))
+
 (define-public go-github-com-huandu-xstrings
   (package
     (name "go-github-com-huandu-xstrings")
