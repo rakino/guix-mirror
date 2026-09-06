@@ -5544,7 +5544,7 @@ wireguard peer, and exposes a socks5/http proxy or tunnels on the machine.")
 (define-public wireproxy-awg
   (package
     (name "wireproxy-awg")
-    (version "1.0.13")
+    (version "1.0.17")
     (source
      (origin
        (method git-fetch)
@@ -5553,7 +5553,7 @@ wireguard peer, and exposes a socks5/http proxy or tunnels on the machine.")
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1p4spqgl1yg0zqi2lmn2gi6z2szlvm955h37dmfwf9ajd82jwcm3"))))
+        (base32 "1wsdyimml8l09m97fq593rj84rlj08ly5vp2bkc4lahj1w9f074z"))))
     (build-system go-build-system)
     (arguments
      (list
@@ -5569,7 +5569,7 @@ wireguard peer, and exposes a socks5/http proxy or tunnels on the machine.")
            go-github-com-makenowjust-heredoc-v2
            go-github-com-things-go-go-socks5
            go-golang-org-x-net
-           go-gvisor-dev-gvisor
+           go-gvisor-dev-gvisor-source
            go-suah-dev-protect))
     (home-page "https://github.com/artem-russkikh/wireproxy-awg")
     (synopsis "AmneziaWG client that exposes itself as a SOCKS5 proxy")
