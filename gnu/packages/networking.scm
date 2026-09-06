@@ -5196,7 +5196,7 @@ daemon.")
 (define-public nebula
   (package
     (name "nebula")
-    (version "1.11.0")
+    (version "1.11.1")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -5205,7 +5205,7 @@ daemon.")
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0awrzm0rf9sqc2m3wvvgdmczairlc31nq5pnx53ff4179fyqi3bg"))
+                "1zj8wlchilk8lwjj686sgbr6ahqackzyhndi45j2hd9iv6mlx36x"))
               ;; Remove windows-related binary blobs and files
               (snippet
                #~(begin
@@ -5251,7 +5251,7 @@ daemon.")
            go-golang-zx2c4-com-wireguard
            go-google-golang-org-protobuf
            go-gopkg-in-yaml-v3
-           go-gvisor-dev-gvisor))
+           go-gvisor-dev-gvisor-source))
     (home-page "https://github.com/slackhq/nebula")
     (synopsis "Scalable, peer-to-peer overlay networking tool")
     (description
