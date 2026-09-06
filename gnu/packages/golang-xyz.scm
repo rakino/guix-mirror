@@ -24870,7 +24870,13 @@ fine-grained log control, extensibility, and scalability.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0zhnrih2px6jm8nxzkz8s7va3lj03bzwxim8wjba9zh7i78bp67z")))))))
+        (base32 "0zhnrih2px6jm8nxzkz8s7va3lj03bzwxim8wjba9zh7i78bp67z"))))
+     (arguments
+      (list
+       #:import-path "github.com/olekukonko/tablewriter"
+       ;; XXX: wrap_test.go:38:12: non-constant format string in call to
+       ;; (*testing.common).Errorf
+       #:test-flags #~(list "-vet=off"))))))
 
 (define-public go-github-com-olekukonko-ts
   (package
