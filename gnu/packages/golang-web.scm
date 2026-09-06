@@ -52,6 +52,7 @@
 ;;; Copyright © 2026 Evgeny Pisemsky <mail@pisemsky.site>
 ;;; Copyright © 2026 Vinicius Monego <monego@posteo.net>
 ;;; Copyright © 2026 Konstantin Suntsov <protvin@disroot.org>
+;;; Copyright © 2026 Nikita Alkhovik <forgoty13@gmail.com>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -4143,29 +4144,25 @@ advantage of Azure's scalable cloud storage.")
 (define-public go-github-com-azure-go-ntlmssp
   (package
     (name "go-github-com-azure-go-ntlmssp")
-    (version "0.0.0-20221128193559-754e69321358")
+    (version "0.1.1")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/Azure/go-ntlmssp")
-             (commit (go-version->git-ref version))))
+              (url "https://github.com/Azure/go-ntlmssp")
+              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0dg20fwylf5lpsc5fgnnzw7jxz0885bg97lla1b5wrlhjas6lidn"))))
+        (base32 "04anxb3aqja8qfsnksf7yg4lydjdils57vhmgpfpxsh60ljxwpx4"))))
     (build-system go-build-system)
     (arguments
      (list
-      ;; See <https://github.com/Azure/go-ntlmssp/issues/40>.
-      #:tests? #f
       #:import-path "github.com/Azure/go-ntlmssp"))
-    (propagated-inputs
-     (list go-golang-org-x-crypto))
     (home-page "https://github.com/Azure/go-ntlmssp")
     (synopsis "NTLM negotiation in Go")
     (description
-     "This package provides @acronym{NT (New Technology) LAN
-Manager,NTLM}/Negotiate authentication over HTTP.")
+     "This package provides @acronym{NT (New Technology) LAN Manager,
+NTLM}/Negotiate authentication over HTTP.")
     (license license:expat)))
 
 (define-public go-github-com-azuread-microsoft-authentication-library-for-go
