@@ -367,7 +367,13 @@ phones and memory cards and generate meaningful file and folder names.")
            #:configure-flags
            #~(list "-Dudev=enabled"
                    "-Dv4l2=enabled"
-                   "-Dtest=true")
+                   "-Dtest=true"
+                   #$@(if (target-x86-32?)
+                          ;; Lower precision to the regular 64-bit IEEE
+                          ;; floats, to avoid failures in the control_value
+                          ;; and histogram tests that compare floats.
+                          #~("-Dcpp_args=-msse2 -mfpmath=sse")
+                          #~()))
            #:phases
            #~(modify-phases %standard-phases
                (add-after 'unpack 'disable-gstreamer-tests
