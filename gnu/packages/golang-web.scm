@@ -18664,6 +18664,55 @@ of the specification.")
 RFC 1014) in Go.")
     (license license:isc)))
 
+(define-public go-github-com-rclone-go-proton-api
+  (package
+    (name "go-github-com-rclone-go-proton-api")
+    (version "1.0.4")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/rclone/go-proton-api")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "19sipnl8z1xa62vvkw77hyizyaffah0hxkb0ij7ydq19s60nvw0p"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/rclone/go-proton-api"
+      #:embed-files #~(list "children" "nodes" "text")))
+    (native-inputs
+     (list go-github-com-stretchr-testify
+           go-github-com-urfave-cli-v2
+           go-go-uber-org-goleak))
+    (propagated-inputs
+     (list go-github-com-bradenaw-juniper
+           go-github-com-emersion-go-message
+           go-github-com-emersion-go-vcard
+           go-github-com-gin-gonic-gin
+           go-github-com-go-resty-resty-v2
+           go-github-com-google-uuid
+           go-github-com-masterminds-semver-v3
+           go-github-com-protonmail-gluon
+           go-github-com-protonmail-go-crypto
+           go-github-com-protonmail-go-srp
+           go-github-com-protonmail-gopenpgp-v3
+           go-github-com-puerkitobio-goquery
+           go-github-com-sirupsen-logrus
+           go-golang-org-x-exp
+           go-golang-org-x-net
+           go-golang-org-x-text
+           go-google-golang-org-grpc
+           go-google-golang-org-protobuf))
+    (home-page "https://github.com/rclone/go-proton-api")
+    (synopsis "Proton API library used by Go-based clients and tools")
+    (description
+     "This package provides a Go Proton API, a Go library implementing a
+client and development server for (a subset of) the Proton REST API.  It's a
+clone of @url{https://github.com/henrybear327/go-proton-api}.")
+    (license license:expat)))
+
 (define-public go-github-com-rclone-gofakes3
   (package
     (name "go-github-com-rclone-gofakes3")
