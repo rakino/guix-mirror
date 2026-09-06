@@ -367,38 +367,36 @@ source code editors and IDEs.")
 (define-public checkmake
   (package
     (name "checkmake")
-    (version "0.2.2")
+    (version "0.3.2")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/checkmake/checkmake")
-             (commit version)))
+              (url "https://github.com/checkmake/checkmake")
+              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1ajrgnm5mg4b317brx53b8cpjvdw6vin1rk6yh9vrhrz014ifps2"))
-       (modules '((guix build utils)))
-       (snippet `(begin
-                   (delete-file-recursively "vendor")))))
+        (base32 "00c8bdj614fygq97aikci9hwsl7ji0digazajhw3bmi3qacjlqp4"))))
     (build-system go-build-system)
     (arguments
      (list
       #:install-source? #f
-      #:import-path "github.com/mrtazz/checkmake"
+      #:import-path "github.com/checkmake/checkmake/..."
+      #:unpack-path "github.com/checkmake/checkmake"
       #:phases
       #~(modify-phases %standard-phases
           (add-after 'install 'install-man
-            (lambda* (#:key import-path #:allow-other-keys)
-              (with-directory-excursion (string-append "src/" import-path)
+            (lambda* (#:key unpack-path #:allow-other-keys)
+              (with-directory-excursion (string-append "src/" unpack-path)
                 (let ((man-dir (string-append #$output "/share/man/man1")))
                   (mkdir-p man-dir)
                   (invoke "go-md2man"
                           "-in" "man/man1/checkmake.1.md"
                           "-out" (string-append man-dir "/checkmake.1")))))))))
     (native-inputs
-     (list go-github-com-docopt-docopt-go
-           go-github-com-go-ini-ini
-           go-github-com-olekukonko-tablewriter-0.0.5
+     (list go-github-com-go-ini-ini
+           go-github-com-olekukonko-tablewriter
+           go-github-com-spf13-cobra
            go-github-com-stretchr-testify
            go-md2man))
     (home-page "https://github.com/checkmake/checkmake")
