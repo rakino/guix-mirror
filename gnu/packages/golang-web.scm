@@ -10761,6 +10761,40 @@ protocol.")
     (description "Generates slug from Unicode string for use in URLs.")
     (license license:mpl2.0)))
 
+(define-public go-github-com-grafana-otel-profiling-go
+  (package
+    (name "go-github-com-grafana-otel-profiling-go")
+    (version "0.6.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/grafana/otel-profiling-go")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "06pc7ji0yk552zsk38j3wa0xv57daisb4q2ngxql38rd5b4r2ybq"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/grafana/otel-profiling-go"))
+    (propagated-inputs
+     (list go-go-opentelemetry-io-otel
+           go-go-opentelemetry-io-otel-sdk
+           go-go-opentelemetry-io-otel-trace))
+    (home-page "https://github.com/grafana/otel-profiling-go")
+    (synopsis "Profiling Instrumentation for OpenTelemetry Go SDK")
+    (description
+     "Open Telemetry integration for Grafana Pyroscope and tracing solutions
+such as Grafana Tempo, Honeycomb, or Jaeger.  The package provides means to
+integrate tracing with profiling.  More specifically, a @code{TracerProvider}
+implementation that annotates profiling data with @code{trace_id} and
+@code{span_id}
+@url{https://github.com/google/pprof/blob/master/doc/README.md#tag-filtering,
+pprof tags}, making it possible to filter the profile of a particular trace or
+span in @url{https://grafana.com/docs/pyroscope/latest/, Pyroscope}.")
+    (license license:asl2.0)))
+
 (define-public go-github-com-gregjones-httpcache
   (package
     (name "go-github-com-gregjones-httpcache")
