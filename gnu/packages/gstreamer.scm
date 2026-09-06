@@ -668,7 +668,13 @@ for the GStreamer multimedia library.")
               (substitute* "tests/check/meson.build"
                 ;; Reported as shaky upstream, see
                 ;; <https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/785>
-                (("\\[ 'elements/flvmux' \\]") "[ 'elements/flvmux', true ]"))))
+                (("\\[ 'elements/flvmux' \\]") "[ 'elements/flvmux', true ]")
+                ;; The elements_matroskademux test fails on i686
+                ;; because of a off-by-one error (see:
+                ;; <https://gitlab.freedesktop.org/gstreamer/gstreamer/-/work_items/5127>).
+                #$@(if (target-32bit?)
+                       #~(((".*'elements/matroskademux'.*") ""))
+                       #~()))))
           (add-before 'check 'pre-check
             (lambda _
               ;; Tests require a running X server.
