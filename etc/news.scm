@@ -44,6 +44,18 @@
 (channel-news
  (version 0)
 
+ (entry (commit "9a18a7e9e06ad01badbb799d0cf671a0be32b85a")
+        (title
+         (en "Linux-libre 7.1 is deprecated"))
+        (body
+         (en "The linux-libre 7.1 kernel series ia no longer
+supported upstream and will be removed from GNU Guix soon:
+
+https://www.kernel.org/category/releases.html
+
+The last supported version is 7.1.13. Please consider switching to Linux-libre
+7.2, or a long term support release series such as 6.18.")))
+
  (entry (commit "e27f3d9d92115a1805b306f7555acfac36be660a")
         (title
          (en "GNOME 49 is now available")
