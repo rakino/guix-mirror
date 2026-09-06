@@ -31422,6 +31422,40 @@ Merkle tree} implementation in Golang.")
 stopped.")
     (license license:expat)))
 
+(define-public go-github-com-tyler-smith-go-bip39
+  (package
+    (name "go-github-com-tyler-smith-go-bip39")
+    (version "1.1.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              ;; Source has been removed by the author, only available in
+              ;; https://archive.softwareheritage.org, thanks!
+              (url "https://github.com/tyler-smith/go-bip39")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0l0accx6c880smkcma0qca3c67kx8p1bc4q2zq54iv8yjy1b2h4w"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/tyler-smith/go-bip39"))
+    (native-inputs
+     (list go-github-com-txthinking-runnergroup))
+    ;; The project is gone, only availalbe as archive:
+    ;; https://archive.softwareheritage.org/browse/origin/directory/
+    ;; ?origin_url=https://github.com/tyler-smith/go-bip39
+    (home-page (string-append "https://web.archive.org/web/20180611032031"
+                              "/https://github.com/tyler-smith/go-bip39"))
+    (synopsis "Golang implementation of the BIP0039 spec for mnemonic seeds")
+    (description
+     "This package provides a Golang implementation of the BIP0039 spec for
+mnemonic seeds.  English wordlist and test vectors are from the standard
+Python BIP0039 implementation from the
+@url{https://github.com/trezor/python-mnemonic, Trezor}.")
+    (license license:expat)))
+
 (define-public go-github-com-u-root-gobusybox-src
   (package
     (name "go-github-com-u-root-gobusybox-src")
