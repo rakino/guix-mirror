@@ -83,6 +83,7 @@
 ;;; Copyright © 2026 Orahcio Felício de Sousa <orahcio@gmail.com>
 ;;; Copyright © 2026 Ryan Prior <rprior@protonmail.com>
 ;;; Copyright © 2026 Untrusem <mysticmoksh@riseup.net>
+;;; Copyright © 2026 Nikita Alkhovik <forgoty13@gmail.com>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -15242,6 +15243,39 @@ provides a buffered io.Writer that is flushed at a timed interval.")
     (description
      "Package jcs transforms UTF-8 JSON data into a canonicalized version
 according @@url{https://rfc-editor.org/rfc/rfc8785.html, RFC 8785}.")
+    (license license:asl2.0)))
+
+(define-public go-github-com-grafana-pyroscope-go-godeltaprof
+  (package
+    (name "go-github-com-grafana-pyroscope-go-godeltaprof")
+    (version "0.1.11")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/grafana/pyroscope-go")
+             (commit (string-append "godeltaprof/v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0mxq436iiz7ghi4y57q7h4b4qaj423hmwhww14asalyjakzw7piz"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/grafana/pyroscope-go/godeltaprof"
+      #:unpack-path "github.com/grafana/pyroscope-go"))
+    (native-inputs (list go-github-com-stretchr-testify
+                         go-github-com-google-pprof))
+    (propagated-inputs (list go-github-com-klauspost-compress))
+    (home-page "https://github.com/grafana/pyroscope-go")
+    (synopsis
+     "Efficient delta profiler for Go memory, mutex, and block profiles")
+    (description
+     "@code{godeltaprof} provides an efficient delta profiler for Go programs,
+targeting memory, mutex, and block profiling.  Unlike the standard Go runtime
+profilers which accumulate values and require dumping and parsing large profiles,
+@code{godeltaprof} computes profile deltas directly from raw records before
+serialization.  The source is based on and extends the Go
+@code{runtime/pprof} package.")
     (license license:asl2.0)))
 
 (define-public go-github-com-grafana-regexp
