@@ -18195,6 +18195,26 @@ authentication of ProtonMail users.")
 Golang crypto library.")
     (license license:expat)))
 
+(define-public go-github-com-protonmail-gopenpgp-v3
+  (package
+    (inherit go-github-com-protonmail-gopenpgp-v2)
+    (name "go-github-com-protonmail-gopenpgp-v3")
+    (version "3.4.1")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/ProtonMail/gopenpgp")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0s3ycn7mfpq3vl35xhnk9164rfr8n4s48g066f9zs6p33h81a7h8"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:skip-build? #t
+      #:import-path "github.com/ProtonMail/gopenpgp/v3"))))
+
 (define-public go-github-com-psiphon-labs-psiphon-tunnel-core
   (package
     (name "go-github-com-psiphon-labs-psiphon-tunnel-core")
