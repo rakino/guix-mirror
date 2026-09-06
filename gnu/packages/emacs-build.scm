@@ -94,7 +94,7 @@ functions to ensure they are called with the right arguments during testing.")
 (define-public emacs-compat
   (package
     (name "emacs-compat")
-    (version "31.0.0.1")
+    (version "31.0.0.2")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -103,7 +103,7 @@ functions to ensure they are called with the right arguments during testing.")
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1ny7andy4j95iij6m2hl6wi8qfmkcbg4ym5bcx19dhycr7ix1dw0"))))
+                "0bcdibsxw5m6ia2krfnan1b8gjfccdg6i8z316z32f4r9y1r3nd6"))))
     (build-system emacs-build-system)
     (arguments
      (list
