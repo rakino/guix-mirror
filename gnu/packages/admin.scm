@@ -7048,7 +7048,7 @@ stored in an SQL database.")
 (define-public xfel
   (package
     (name "xfel")
-    (version "1.3.5")
+    (version "1.3.6")
     (source
      (origin
        (method git-fetch)
@@ -7056,7 +7056,7 @@ stored in an SQL database.")
               (url "https://github.com/xboot/xfel")
               (commit (string-append "v" version))))
        (sha256
-        (base32 "1vmb3dr3vplxdxn9i8i4chdnfihb429rakvkqsfccb885ivkkn3b"))
+        (base32 "0kl5cjjrlzj9kr4ksdczgfja1lv88jgpnk8drm763chy94iqczxl"))
        (file-name (git-file-name name version))))
     (native-inputs
      (list pkg-config))
