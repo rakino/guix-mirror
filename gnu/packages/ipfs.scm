@@ -1731,7 +1731,7 @@ specified in @url{https://datatracker.ietf.org/doc/html/rfc8484, RFC 8484}.")
 (define-public go-github-com-libp2p-go-libp2p
   (package
     (name "go-github-com-libp2p-go-libp2p")
-    (version "0.47.0")
+    (version "0.48.0")
     (source
      (origin
        (method git-fetch)
@@ -1740,7 +1740,7 @@ specified in @url{https://datatracker.ietf.org/doc/html/rfc8484, RFC 8484}.")
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1kz7rfmgnxcjcy0ixy6gib9ppndmhkm1zdljvlzvgxnd9jdz00x4"))
+        (base32 "11b1g6nhcrkkx00zga6i42b95zj4p3zjf6rnv18yv2898hhla400"))
        (modules '((guix build utils)))
        (snippet
         #~(begin
@@ -1771,21 +1771,19 @@ specified in @url{https://datatracker.ietf.org/doc/html/rfc8484, RFC 8484}.")
            go-github-com-marcopolo-simnet
            go-go-uber-org-goleak))
     (propagated-inputs
-     (list go-github-com-benbjohnson-clock
+     (list go-filippo-io-keygen
+           go-github-com-benbjohnson-clock
            go-github-com-davidlazar-go-crypto
            go-github-com-decred-dcrd-dcrec-secp256k1-v4
            go-github-com-flynn-noise
-           go-github-com-google-gopacket
            go-github-com-gorilla-websocket
            go-github-com-hashicorp-golang-lru-arc-v2
            go-github-com-hashicorp-golang-lru-v2
            go-github-com-huin-goupnp
            go-github-com-ipfs-go-cid
            go-github-com-ipfs-go-datastore
-           go-github-com-ipfs-go-log-v2
            go-github-com-jackpal-go-nat-pmp
            go-github-com-jbenet-go-temp-err-catcher
-           go-github-com-klauspost-compress
            go-github-com-koron-go-ssdp
            go-github-com-libp2p-go-buffer-pool
            go-github-com-libp2p-go-flow-metrics
@@ -1812,14 +1810,13 @@ specified in @url{https://datatracker.ietf.org/doc/html/rfc8484, RFC 8484}.")
            go-github-com-pion-ice-v4
            go-github-com-pion-logging
            go-github-com-pion-sctp
-           go-github-com-pion-stun
+           go-github-com-pion-stun-v3
            go-github-com-pion-webrtc-v4
            go-github-com-prometheus-client-golang
            go-github-com-prometheus-client-model
            go-github-com-quic-go-quic-go
            go-github-com-quic-go-webtransport-go
            go-go-uber-org-fx
-           go-go-uber-org-zap
            go-golang-org-x-crypto
            go-golang-org-x-sync
            go-golang-org-x-sys
