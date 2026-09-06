@@ -18747,6 +18747,40 @@ clone of @url{https://github.com/henrybear327/go-proton-api}.")
     (description "This package implements a fake S3 server for rclone.")
     (license license:expat)))
 
+(define-public go-github-com-rclone-proton-api-bridge
+  (package
+    (name "go-github-com-rclone-proton-api-bridge")
+    (version "1.0.5")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/rclone/Proton-API-Bridge")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "01svmcn295vyjw0lb16dy6sa8vzm4pwa60yb1arw7lvlib6kr26d"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/rclone/Proton-API-Bridge"
+      #:embed-files #~(list "children" "nodes" "text")))
+    (propagated-inputs
+     (list go-github-com-protonmail-gluon
+           go-github-com-protonmail-go-crypto
+           go-github-com-protonmail-gopenpgp-v3
+           go-github-com-rclone-go-proton-api
+           go-github-com-relvacode-iso8601
+           go-golang-org-x-sync))
+    (home-page "https://github.com/rclone/Proton-API-Bridge")
+    (synopsis "Proton API Bridge")
+    (description
+     "@code{proton-go-api} provides the basic building blocks of API calls and
+error handling, such as 429 exponential back-off, but it is pretty much just a
+barebone interface to the Proton API.  It's a clone of
+@url{https://github.com/henrybear327/Proton-API-Bridge}.")
+    (license license:expat)))
+
 (define-public go-github-com-rcrowley-go-metrics
   (package
     (name "go-github-com-rcrowley-go-metrics")
