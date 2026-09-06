@@ -388,7 +388,7 @@ attachments, etc.")
 (define-public go-github-com-containers-gvisor-tap-vsock
   (package
     (name "go-github-com-containers-gvisor-tap-vsock")
-    (version "0.8.8")
+    (version "0.8.9")
     (source
      (origin
        (method git-fetch)
@@ -397,7 +397,7 @@ attachments, etc.")
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1xz710dmy58gngd0qizjw8g9nkraksqald8vzhwc5h36dqkc8nrf"))
+        (base32 "1knivsg39x46i4zhbz7cjrcykdkg4xwqy0qf24zyd022hzjznykr"))
        (modules '((guix build utils)))
        (snippet
         #~(begin
@@ -466,7 +466,7 @@ attachments, etc.")
            go-golang-org-x-sync
            go-golang-org-x-sys
            go-gopkg-in-yaml-v3
-           go-gvisor-dev-gvisor))
+           go-gvisor-dev-gvisor-source))
     (home-page "https://github.com/containers/gvisor-tap-vsock")
     (synopsis "Network stack for virtualization based on gVisor")
     (description "This package provides a replacement for @code{libslirp} and
