@@ -128,7 +128,7 @@ between computers.")
            go-golang-org-x-net
            go-golang-org-x-sys
            go-golang-org-x-term
-           go-gvisor-dev-gvisor
+           go-gvisor-dev-gvisor-source
            go-lukechampine-com-blake3))
     (native-inputs
      (list texinfo))
