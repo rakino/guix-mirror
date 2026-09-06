@@ -266,6 +266,35 @@ the necessary APIs to build a wide array of higher-level primitives.")
 in @url{https://www.rfc-editor.org/rfc/rfc9180.html RFC 9180}.")
     (license license:bsd-3)))
 
+(define-public go-filippo-io-keygen
+  (package
+    (name "go-filippo-io-keygen")
+    (version "1.0.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/FiloSottile/keygen")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "0m20ily1ivi8yvkmr847m8w9i21s0nb4z3wyknmz3gxaci5qzh62"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "filippo.io/keygen"
+      #:test-flags #~(list "-short")))
+    (native-inputs
+     (list go-github-com-canonical-go-sp800-90a-drbg))
+    (propagated-inputs
+     (list go-filippo-io-bigmod
+           go-golang-org-x-crypto))
+    (home-page "https://filippo.io/keygen")
+    (synopsis "Deterministic key generation for Go")
+    (description
+     "Package keygen implements deterministic key generation algorithms.")
+    (license license:isc)))
+
 (define-public go-filippo-io-nistec
   (package
     (name "go-filippo-io-nistec")
