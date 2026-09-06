@@ -133,6 +133,54 @@
 archives as created by Podman, CRI-O and containerd.")
     (license license:asl2.0)))
 
+(define-public go-github-com-containerd-accelerated-container-image-pkg-types
+  ;; Submodule to break cycle in github.com/data-accelerator/zdfs.
+  (hidden-package
+   (package
+     (name "go-github-com-containerd-accelerated-container-image-pkg-types")
+     (version "1.4.3")
+     (source
+      (origin
+        (method git-fetch)
+        (uri (git-reference
+               (url "https://github.com/containerd/accelerated-container-image")
+               (commit (string-append "v" version))))
+        (file-name (git-file-name name version))
+        (sha256
+         (base32 "086ywdk8mnqnjj3a07ggcyf52cqqsr8cbx2iw2qrncd1slb9l0vv"))
+        (modules '((guix build utils)
+                   (ice-9 ftw)
+                   (srfi srfi-26)))
+        (snippet
+         #~(begin
+             (define (delete-all-but directory . preserve)
+               (define (directory? x)
+                 (and=> (stat x #f)
+                        (compose (cut eq? 'directory <>) stat:type)))
+               (with-directory-excursion directory
+                 (let* ((pred
+                         (negate (cut member <> (append '("." "..") preserve))))
+                        (items (scandir "." pred)))
+                   (for-each (lambda (item)
+                               (if (directory? item)
+                                   (delete-file-recursively item)
+                                   (delete-file item)))
+                             items))))
+             (delete-all-but "." "pkg")
+             (delete-all-but "pkg" "types")))))
+     (build-system go-build-system)
+     (arguments
+      (list
+       #:skip-build? #t
+       #:tests? #f
+       #:import-path "github.com/containerd/accelerated-container-image"))
+     (home-page "https://github.com/containerd/accelerated-container-image")
+     (synopsis "Remote container image format types")
+     (description
+      "This packages provides types from
+@url{https://github.com/containerd/accelerated-container-image}.")
+     (license license:asl2.0))))
+
 (define-public go-github-com-containerd-aufs
   (package
     (name "go-github-com-containerd-aufs")
