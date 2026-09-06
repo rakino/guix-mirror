@@ -186,16 +186,22 @@ keys, no configuration options, and Unix-style composability.")
 (define-public go-filippo-io-bigmod
   (package
     (name "go-filippo-io-bigmod")
-    (version "0.1.0")
+    ;; New version is not released yet.
+    (properties '((commit . "f8a47775ebe55ce8751fc76f03e1fe4a506b0ec5")
+                  (revision . "0")
+                  (go-pseudo-version . "0.1.1-0.20260103110540-f8a47775ebe5")))
+    (version (git-version "0.1.1"
+                          (assoc-ref properties 'revision)
+                          (assoc-ref properties 'commit)))
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
               (url "https://github.com/FiloSottile/bigmod")
-              (commit (string-append "v" version))))
+              (commit (assoc-ref properties 'commit))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "029h8qh9ym384q56aprm1if9arq7kmqdsv6l2wbjhkq8w307vd7r"))))
+        (base32 "0gvg6v8hxc19lxfgklvyw4nn8163gayrwd5frmap15ap7ah2lrkw"))))
     (build-system go-build-system)
     (propagated-inputs
      (list go-golang-org-x-sys))
