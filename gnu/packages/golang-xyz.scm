@@ -5197,6 +5197,37 @@ exit).")
     (license (list license:bsd-3
                    license:expat))))
 
+(define-public go-github-com-canonical-go-sp800-90a-drbg
+  (package
+    (name "go-github-com-canonical-go-sp800-90a-drbg")
+    (version "0.0.0-20210314144037-6eeb1040d6c3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/canonical/go-sp800.90a-drbg")
+              (commit (go-version->git-ref version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1c652zpvf0jhcir735fzphv2701gz5z5wyzbqsv26p2svqazkimb"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:import-path "github.com/canonical/go-sp800.90a-drbg"))
+    (native-inputs
+     (list go-gopkg-in-check-v1))
+    (propagated-inputs
+     (list go-github-com-kr-pretty
+           go-github-com-kr-text
+           go-golang-org-x-xerrors))
+    (home-page "https://github.com/canonical/go-sp800.90a-drbg")
+    (synopsis "Random Number Generator")
+    (description
+     "Package drbg implements several @acronym{Deterministic Random Bit
+Generators, DRBG}s as recommended by NIST SP-800-90A specified in
+@url{http://csrc.nist.gov/publications/nistpubs/800-90A/SP800-90A.pdf}.")
+    (license license:lgpl3)))
+
 (define-public go-github-com-catppuccin-go
   (package
     (name "go-github-com-catppuccin-go")
