@@ -25818,6 +25818,43 @@ Telegram Bot API}.  This package provides the best of its kind API for command
 routing, inline query requests and keyboards, as well as callbacks.")
     (license license:expat)))
 
+(define-public go-gvisor-dev-gvisor-source
+  (let ((commit "9414b50a5633100fd7299a5a7998742575dcb669")
+        (revision "1"))
+    (package
+      (name "go-gvisor-dev-gvisor-source")
+      (version (git-version "0.0.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+                (url "https://github.com/google/gvisor")
+                (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0vqaclb2ignkcs7n463bj349m0xybdsv71i6afhzh8r05hdywzax"))
+         (modules '((guix build utils)))
+         (snippet
+          #~(begin
+              (for-each delete-file (find-files "." "^(BUILD|.*_test\\.go)$"))))))
+      (build-system go-build-system)
+      (arguments
+       (list
+        #:skip-build? #t
+        #:tests? #f
+        #:import-path "gvisor.dev/gvisor"))
+      (propagated-inputs
+       (list go-github-com-google-btree
+             go-golang-org-x-time))
+      (home-page "https://gvisor.dev/gvisor")
+      (synopsis "Application Kernel for Containers")
+      (description
+       "This package provides source of @code{gvisor.dev/gvisor}.")
+      (license license:asl2.0)
+      ;; Older source package for wirerguard-go, yggdrasil, nebula, and nncp
+      ;; which use only it's "pkg/tcpip" part.
+      (properties '((hidden? . #t))))))
+
 (define-public go-h12-io-socks
   (package
     (name "go-h12-io-socks")
