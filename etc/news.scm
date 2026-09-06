@@ -46,7 +46,8 @@
 
  (entry (commit "9a18a7e9e06ad01badbb799d0cf671a0be32b85a")
         (title
-         (en "Linux-libre 7.1 is deprecated"))
+         (en "Linux-libre 7.1 is deprecated")
+         (pt "Linux-libre 7.1 está depreciado"))
         (body
          (en "The linux-libre 7.1 kernel series ia no longer
 supported upstream and will be removed from GNU Guix soon:
@@ -54,7 +55,14 @@ supported upstream and will be removed from GNU Guix soon:
 https://www.kernel.org/category/releases.html
 
 The last supported version is 7.1.13. Please consider switching to Linux-libre
-7.2, or a long term support release series such as 6.18.")))
+7.2, or a long term support release series such as 6.18.")
+         (pt "A série 7.1 do kernel linux-libre 7.1 não é mais suportada pelo
+fornecedor e em breve será removida do GNU Guix:
+
+https://www.kernel.org/category/releases.html
+
+A última versão suportada é a 7.1.13.  Por favor cogite mudar para a versão
+7.2 do Linux-libre, ou para um lançamento de suporte estandido como o 6.18.")))
 
  (entry (commit "e27f3d9d92115a1805b306f7555acfac36be660a")
         (title
@@ -101,15 +109,41 @@ Zurücksetzen auf GNOME 48 zu Fehlern in Anwendungen führen können
 Systemgeneration wechseln.
 
 Wenn Sie auf Fehler stoßen, melden Sie diese gerne direkt auf Guix’
-Fehlerdatenbank auf Codeberg.")))
+Fehlerdatenbank auf Codeberg.")
+         (pt "O desktop GNOME foi atualizado para a versão 49, o que inclui
+atualizações para a maior parte dos aplicativos, correções de falhas e um novo
+gerenciador de sessão baseado no Sheperd.  Veja
+@url{https://release.gnome.org/49/, as notas de lançamento do GNOME 49} para
+as mudanças anunciadas pelo fornecedor.
+
+O @command{gnome-session} no GNOME 49 adquiriu uma dependência ao systemd.  O
+mesmo foi substituído pelo
+@url{https://gitlab.gnome.org/noe/gnome-session-shepherd,
+gnome-session-shepherd}, um novo gerenciador de sessão baseado no
+GNU Shepherd.  Ele é responsável por iniciar o GDM e sua sessão GNOME, bem
+como seus arquivos de desktop do XDG Autostart.  Após atualizar seu sistema,
+você pode interagir com ele via o comando @command{gherd}.
+
+As atualizações incluem mudanças retroativamente incompatíveis que podem
+quebrar aplicações (Keyring, Tracker) ao reverter para o GNOME 48.  Cogite
+salvar por segurança os diretórios @file{.local} de seus usuários antes de
+mudar as gerações de sistema.
+
+Acaso encontre quaisquer falhas, sinta-se livre para reportá-las diretamente
+no sistema de acompanhamento de falhas no Codeberg do Guix.")))
 
  (entry (commit "125078e80dd211af79ae3b1a0a09e2a1a8396f0a")
         (title
-         (en "Linux-libre 5.10, 5.15, 6.19 and 7.0 removed"))
+         (en "Linux-libre 5.10, 5.15, 6.19 and 7.0 removed")
+         (pt "Linux-libre 5.10, 5.15, 6.19 e 7.0 removidos"))
         (body
          (en "The linux-libre 5.10, 5.15, 6.19 and 7.0 kernel series were
 removed from Guix. Consider updating to one of the newer kernel series, such
 as the current default 7.1 or longterm support release 6.18, or the latest
+7.2.")
+         (pt "As séries 5.10, 5.15, 6.19 e 7.0 do kernel linux-libre foram
+removidas do Guix.  Cogite atualizar para uma das séries mais recentes, como a
+padrão atual 7.1 ou o lançamento de suporte estendido 6.18, ou a mais recente
 7.2.")))
 
  (entry (commit "0257734a40999bfbbe0daa922e2d0e4928cdd5f0")
