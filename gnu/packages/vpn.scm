@@ -111,7 +111,7 @@
 (define-public amneziawg-linux-kernel-module
   (package
     (name "amneziawg-linux-kernel-module")
-    (version "1.0.20260329")
+    (version "3.1.20260828")
     (source
      (origin
        (method git-fetch)
@@ -121,7 +121,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0ygy87cdmxjb7r6sipkniqi3m0952la2sssissbscnlr6sc6rjs2"))))
+        (base32 "17a0xf11ykq4k311ipjxvpirnkx09dqmjmf93lyhcx5bqpf9z27b"))))
     (build-system linux-module-build-system)
     (arguments
      (list
@@ -160,7 +160,7 @@
 (define-public amneziawg-tools
   (package
     (name "amneziawg-tools")
-    (version "1.0.20260223")
+    (version "3.1.20260812")
     (source
      (origin
        (method git-fetch)
@@ -169,7 +169,7 @@
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "05jyfqdbk9km0dahmddif7dghp1zslz458yd2hf18fha456qrii6"))))
+        (base32 "12dwzcskssvkh3izgndhkcv2kqy633qmagl573k5wcfqr3gx4mxr"))))
     (build-system gnu-build-system)
     (arguments
      (list
