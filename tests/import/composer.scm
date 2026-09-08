@@ -33,8 +33,8 @@
 (define test-json
   "{
   \"packages\": {
-    \"foo/bar\": {
-      \"0.1\": {
+    \"foo/bar\": [
+      {
         \"name\": \"foo/bar\",
         \"description\": \"description\",
         \"keywords\": [\"testing\"],
@@ -48,7 +48,7 @@
         \"require\": {},
         \"require-dev\": {\"phpunit/phpunit\": \"1.0.0\"}
       }
-    }
+    ]
   }
 }")
 

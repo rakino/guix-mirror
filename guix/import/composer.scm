@@ -99,11 +99,16 @@
   "Return a composer-package representation of the Composer metadata for the
 package NAME with optional VERSION, or #f on failure.  VERSION may be given as
 version prefix if PARTIAL-VERSION? is #t."
-  (and-let* ((url (string-append (%composer-base-url) "/p/" name ".json"))
+  (and-let* ((url (string-append (%composer-base-url) "/p2/" name ".json"))
              (packages (and=> (json-fetch url)
                               (lambda (pkg)
-                                (let ((pkgs (assoc-ref pkg "packages")))
-                                  (or (assoc-ref pkgs name) pkg)))))
+                                (let* ((pkgs (assoc-ref pkg "packages"))
+                                       (versions
+                                        (vector->list (assoc-ref pkgs name))))
+                                  (map (lambda (version)
+                                         (cons (assoc-ref version "version")
+                                               version))
+                                       versions)))))
              (all-versions (map car packages))
              (valid-versions (filter valid-version? all-versions))
              (version (or (find-version valid-versions version partial-version?)
