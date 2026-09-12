@@ -42,6 +42,7 @@
 ;;; Copyright © 2025 John Khoo <johnkhootf@gmail.com>
 ;;; Copyright © 2026 orahcio <orahcio@gmail.com>
 ;;; Copyright © 2026 Wilko Meyer <w@wmeyer.eu>
+;;; Copyright © 2026 François Joulaud <francois-oss@avalenn.eu>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -140,6 +141,64 @@
      "dos2unix is a tool to convert line breaks in a text file from Unix format
 to DOS format and vice versa.")
     (license license:bsd-2)))
+
+(define-public jd
+  (package
+    (name "jd")
+    (version "2.5.0")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/josephburnett/jd")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (modules '((guix build utils)
+                  (ice-9 ftw)
+                  (srfi srfi-26)))
+       (snippet
+        #~(begin
+            (define (delete-all-but directory . preserve)
+              (define (directory? x)
+                (and=> (stat x #f)
+                       (compose (cut eq?
+                                     'directory <>) stat:type)))
+              (with-directory-excursion directory
+                (let* ((pred (negate (cut member <>
+                                          (append '("." "..") preserve))))
+                       (items (scandir "." pred)))
+                  (for-each (lambda (item)
+                              (if (directory? item)
+                                  (delete-file-recursively item)
+                                  (delete-file item))) items))))
+            (delete-all-but "." "v2")
+            ;; Exclude Web UI.
+            (delete-file-recursively "v2/internal/web/pack")
+            (delete-file-recursively "v2/internal/web/ui")))
+       (sha256
+        (base32 "0l05wchxixjcfzxxxxkznar0y49zwpbs3iyfl4ik5dx7xg0ryzjq"))))
+    (build-system go-build-system)
+    (arguments
+     (list
+      #:install-source? #f
+      #:import-path "github.com/josephburnett/jd/v2/jd"
+      #:unpack-path "github.com/josephburnett/jd"
+      #:test-subdirs #~(list "../...")))
+    (native-inputs
+     (list go-github-com-go-openapi-jsonpointer
+           go-github-com-stretchr-testify
+           go-go-yaml-in-yaml-v2
+           go-go-yaml-in-yaml-v3))
+    (home-page "https://github.com/josephburnett/jd")
+    (synopsis "JSON diff and patch")
+    (description
+     "@code{jd} is a commandline utility and Go library for diffing and
+patching JSON and YAML values.  It supports a native @code{jd} format (similar
+to unified format) as well as JSON Merge Patch
+(@url{https://datatracker.ietf.org/doc/html/rfc7386, RFC 7386}) and a subset
+of JSON Patch (@url{https://datatracker.ietf.org/doc/html/rfc6902, RFC
+6902}).")
+    (license license:expat)))
 
 (define-public recode
   (package
