@@ -6744,7 +6744,7 @@ programs such as @code{vi}, @code{top}, @code{htop} or even @code{emacs
 (define-public emacs-mistty
   (package
     (name "emacs-mistty")
-    (version "1.5")
+    (version "2.0.1")
     (source
      (origin
        (method git-fetch)
@@ -6753,17 +6753,8 @@ programs such as @code{vi}, @code{top}, @code{htop} or even @code{emacs
              (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1dlb4k7sbjjgyhikbcw0qf9js328vhs964lmhciyh8ahcfb7i9l6"))))
+        (base32 "1p8ib2a5dr2ni1ra01jvydz6gxv247pq8cbvd11xv9b0i3qjmq8h"))))
     (build-system emacs-build-system)
-    (arguments
-     (list
-      #:phases #~(modify-phases %standard-phases
-                   (add-before 'patch-el-files 'replace-bash-path
-                     (lambda* (#:key inputs #:allow-other-keys)
-                       (substitute* "mistty-term.el"
-                         (("/bin/bash")
-                          (search-input-file inputs "bin/bash"))))))))
-    (inputs (list bash))
     (home-page "https://github.com/szermatt/mistty")
     (synopsis "Emacs terminal major mode based on Term")
     (description
