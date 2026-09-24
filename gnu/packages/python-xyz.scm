@@ -3336,6 +3336,29 @@ the 2D knapsack or bin packing problem, consisting on packing a set of
 rectangles into the smallest number of bins.")
     (license license:asl2.0)))
 
+(define-public python-refleak
+  (package
+    (name "python-refleak")
+    (version "0.2.2")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/mne-tools/refleak")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1851pxcbvdab1wq64drkw873mis9yqrvamsv0cxj7p6p4l7nfj4h"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list python-pytest python-setuptools python-setuptools-scm))
+    (home-page "https://github.com/mne-tools/refleak")
+    (synopsis "Track down reference leaks in Python")
+    (description
+     "This package provides a library to find out what is still holding a
+reference to an object that should be dead.  It is used to track down reference
+leaks in @code{MNE-Python}, @code{PyVista} and @code{pyvistaqt}.")
+    (license license:bsd-3)))
+
 (define-public python-represent
   (package
     (name "python-represent")
