@@ -1318,22 +1318,35 @@ characterization result in a liberty library file.")
                                 (search-input-file inputs
                                                    "lib/libngspice.so"))
                                "\"")))))
-         (add-after 'install 'wrap-program
-           ;; Ensure correct Python at runtime.
+         (add-after 'install 'wrap-programs
+           ;; Set up proxy discovery and Python for standalone editors too.
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (let* ((out (assoc-ref outputs "out"))
                     (python (assoc-ref inputs "python"))
-                    (file (string-append out "/bin/kicad"))
+                    (schemas (assoc-ref inputs "gsettings-desktop-schemas"))
+                    (gtk (assoc-ref inputs "gtk+"))
+                    (networking (assoc-ref inputs "glib-networking"))
+                    (mime (assoc-ref inputs "shared-mime-info"))
                     (path (string-append out "/lib/python"
                                          ,(version-major+minor (package-version
                                                                 python))
                                          "/site-packages:"
                                          (getenv "GUIX_PYTHONPATH"))))
-               (wrap-program file
-                 `("GUIX_PYTHONPATH" ":" prefix
-                   (,path))
-                 `("PATH" ":" prefix
-                   (,(string-append python "/bin:"))))))))))
+               (for-each
+                (lambda (file)
+                  (wrap-program file
+                    `("GUIX_PYTHONPATH" ":" prefix (,path))
+                    `("PATH" ":" prefix (,(string-append python "/bin")))
+                    ;; GdkPixbuf needs MIME data to recognize image formats.
+                    `("XDG_DATA_DIRS" ":" prefix
+                      (,(string-append schemas "/share")
+                       ,(string-append gtk "/share")
+                       ,(string-append mime "/share")))
+                    `("GIO_EXTRA_MODULES" ":" prefix
+                      (,(string-append networking "/lib/gio/modules")))))
+                ;; The launchers have no extension.  Do not wrap the .kiface
+                ;; shared libraries installed alongside them.
+                (find-files (string-append out "/bin") "^[^.]+$"))))))))
     (native-search-paths
      ;; Currently, KiCad environment variables are single-valued
      ;; (see https://gitlab.com/kicad/code/kicad/-/issues/14792).
@@ -1373,7 +1386,9 @@ characterization result in a liberty library file.")
                   curl
                   gdk-pixbuf
                   glew
+                  glib-networking
                   glm
+                  gsettings-desktop-schemas
                   hicolor-icon-theme
                   gtk+
                   libgit2
@@ -1389,6 +1404,7 @@ characterization result in a liberty library file.")
                   protobuf
                   python-wrapper
                   python-wxpython
+                  shared-mime-info
                   wxwidgets-sans-egl
                   (list zstd "lib")))
     (home-page "https://www.kicad.org/")
