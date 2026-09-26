@@ -36388,7 +36388,7 @@ buffer displays recursive dir sizes.")
 (define-public emacs-dired-preview
   (package
     (name "emacs-dired-preview")
-    (version "0.6.1")
+    (version "0.7.0")
     (source
      (origin
        (method git-fetch)
@@ -36398,7 +36398,7 @@ buffer displays recursive dir sizes.")
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "0mg50i2imjn69q7rn088nxnmngvqlzq9y5ig8pl90c0cirfivlkz"))))
+         "0drf319mqb93n85ny78bq7x747477anipdsk8zffmg9rmnz5jbd7"))))
     (build-system emacs-build-system)
     (arguments
      (list
