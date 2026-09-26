@@ -8387,7 +8387,7 @@ returns multiple locations, a list is displayed to choose from.")
 (define-public emacs-graphviz-dot-mode
   (package
     (name "emacs-graphviz-dot-mode")
-    (version "0.4.2")
+    (version "0.5.0")
     (source
      (origin
        (method git-fetch)
@@ -8396,7 +8396,7 @@ returns multiple locations, a list is displayed to choose from.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1v1p85wk73nfsvv66qf90flgf9dqhmv15z1r7q4zmc4ifklqn08m"))))
+        (base32 "07jshr9wvjlqs0fkckqjm0c9vakzs331bia4n02xlyif96qzdjs6"))))
     (build-system emacs-build-system)
     (arguments
      (list
