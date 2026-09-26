@@ -49787,7 +49787,7 @@ framework for VHDL/SystemVerilog.")
 (define-public emacs-vundo
   (package
     (name "emacs-vundo")
-    (version "2.4.0")
+    (version "2.5.0")
     (source
      (origin
        (method git-fetch)
@@ -49797,7 +49797,7 @@ framework for VHDL/SystemVerilog.")
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "034ynwfk374i27vvfpr13n3qw02ihm0189m8frxfqdbd3hismjkb"))))
+         "1v9h1y5yxd568yvaiw8381zaf9j83p2pgmsii0wp675aw2lrsdi5"))))
     (build-system emacs-build-system)
     (arguments
      (list
