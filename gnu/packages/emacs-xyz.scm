@@ -48619,7 +48619,7 @@ for detecting and improve non-idiomatic Clojure source code.")
 (define-public emacs-kirigami
   (package
     (name "emacs-kirigami")
-    (version "1.1.5")
+    (version "1.2.0")
     (source
      (origin
        (method git-fetch)
@@ -48629,7 +48629,7 @@ for detecting and improve non-idiomatic Clojure source code.")
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "03ql2x4npkw60mjvfn83gnp6dbshf6ikhj7558mwdk8qi695q2fc"))))
+         "05djsiwxjmb3dhahnc51f0wb8ps92zs913ykmb3lx223disxyyvp"))))
     (build-system emacs-build-system)
     (arguments (list #:tests? #f))      ;no tests
     (synopsis "Unified method to fold and unfold text in Emacs")
