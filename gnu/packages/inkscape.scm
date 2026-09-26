@@ -272,6 +272,11 @@ endif()~%~%"
                                    "cli_pdfinput-multi-page-sample_check_output"
                                    "test_lpe"
                                    "test_geom-pathstroke")
+                                 '())
+                          ;; This one fails on aarch64 but not x86-64, see
+                          ;; https://gitlab.com/inkscape/lib2geom/-/work_items/80
+                          #$@(if (target-aarch64?)
+                                 '("test_geom-pathstroke")
                                  '()))))
                    (invoke "make" "-j" job-count "tests")
                    (invoke "ctest" "-j" job-count
