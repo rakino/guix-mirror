@@ -4116,7 +4116,7 @@ theme to the current session.")
 (define-public emacs-vscode-dark-plus
   (package
     (name "emacs-vscode-dark-plus")
-    (version "2.0.0")
+    (version "2.1.0")
     (source
      (origin
        (method git-fetch)
@@ -4125,7 +4125,7 @@ theme to the current session.")
              (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1vcaqvhdgr91pr7kqskbscs8awm8jp6dkh79h6w36i9ipmc4l4hl"))))
+        (base32 "1aphhpisg20cclclnygf8wrkrw9rxh2b653jnr86ikjki6j8sw98"))))
     (build-system emacs-build-system)
     (home-page "https://github.com/ianyepan/vscode-dark-plus-emacs-theme")
     (synopsis "Emacs port of the default VS Code Dark+ theme")
