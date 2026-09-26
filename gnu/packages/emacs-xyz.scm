@@ -11125,7 +11125,7 @@ boxes, and more.")
 (define-public emacs-org-books
   (package
     (name "emacs-org-books")
-    (version "0.3.2")
+    (version "0.4.0")
     (source
      (origin
        (method git-fetch)
@@ -11135,8 +11135,9 @@ boxes, and more.")
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "1j2yw6mpki3k5ak5ll93129y389gpbnl86y4c651gash3pd6k088"))))
+         "03z13fc3ndzzw15q7ncv7krhrdqm1xldh57g3ph1sifslj25bz3s"))))
     (build-system emacs-build-system)
+    (arguments (list #:tests? #f))    ;most tests require network access
     (propagated-inputs
      (list emacs-dash
            emacs-enlive
