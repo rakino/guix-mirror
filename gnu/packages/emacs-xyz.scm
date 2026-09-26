@@ -47691,7 +47691,7 @@ provides an easy way to bind keys under a configurable prefix key.")
 (define-public emacs-spacious-padding
   (package
     (name "emacs-spacious-padding")
-    (version "0.8.0")
+    (version "0.9.0")
     (source
      (origin
        (method git-fetch)
@@ -47700,7 +47700,7 @@ provides an easy way to bind keys under a configurable prefix key.")
               (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1vb9nbzjz5bpfbmmsf2ab8dizqmn4bbk0nd95rfv207gyjrgy6hn"))))
+        (base32 "02fpp0iyffnb49w574hqchapjy7fj0cpn9l2c6npk495lm0yb3ax"))))
     (build-system emacs-build-system)
     (arguments
      (list
