@@ -10851,7 +10851,7 @@ serve files and directory listings.")
 (define-public emacs-skewer-mode
   (package
     (name "emacs-skewer-mode")
-    (version "1.8.0")
+    (version "1.9.0")
     (source
      (origin
        (method git-fetch)
@@ -10860,7 +10860,7 @@ serve files and directory listings.")
              (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1ha7jl7776pk1bki5zj2q0jy66450mn8xr3aqjc0m9kj3gc9qxgw"))))
+        (base32 "1yb9crkv8is7rq9z3kpprsppk904ds2vczkj84l5ss7aqwps5cn0"))))
     (build-system emacs-build-system)
     (propagated-inputs
      (list emacs-simple-httpd emacs-js2-mode))
