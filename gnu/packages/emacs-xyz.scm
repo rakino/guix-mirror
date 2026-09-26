@@ -15126,7 +15126,7 @@ sgml/html integration, and indentation (working with sgml).")
 (define-public emacs-jinx
   (package
     (name "emacs-jinx")
-    (version "2.8")
+    (version "2.11")
     (source
      (origin
        (method git-fetch)
@@ -15136,7 +15136,7 @@ sgml/html integration, and indentation (working with sgml).")
          (commit version)))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0vb7vdv168wpn7pxcnkj2lqkc2y50ig7inr5l7z2mbx5xasgkb7y"))))
+        (base32 "1sq7gam0yihddsfwfirqyfj6h8lyxwdgpkx55aajd6pi4bzqa568"))))
     (build-system emacs-build-system)
     (arguments
      (list
@@ -15151,10 +15151,7 @@ sgml/html integration, and indentation (working with sgml).")
                "-f" "jinx--load-module")))
           (add-after 'expand-load-path 'build-info
             (lambda _
-              (invoke "emacs" "--batch"
-                      "--eval=(require 'ox-texinfo)"
-                      "--eval=(find-file \"README.org\")"
-                      "--eval=(org-texinfo-export-to-info)")))
+              (lambda _ (emacs-makeinfo))))
           (add-after 'build-jinx-mod 'patch-path-to-jinx-mod
             (lambda _
               (let ((file "jinx.el"))
