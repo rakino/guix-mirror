@@ -7578,44 +7578,40 @@ Its features are:
     (license (list license:unlicense license:wtfpl2))))
 
 (define-public emacs-citeproc
-  ;; A more recent commit is necessary for compatibility with the
-  ;; built-in emacs-org.
-  (let ((commit "a3d62ab8e40a75fcfc6e4c0c107e3137b4db6db8")
-        (revision "0"))
-    (package
-      (name "emacs-citeproc")
-      (version (git-version "0.9.4" revision commit))
-      (source
-       (origin
-         (method git-fetch)
-         (uri (git-reference
-                (url "https://github.com/andras-simonyi/citeproc-el")
-                (commit commit)))
-         (file-name (git-file-name name version))
-         (sha256
-          (base32 "1ffxh22xhzg582hbpsxr6cyjfyvvv5yqn3k39qxmkxbxk0g6hair"))))
-      (build-system emacs-build-system)
-      (arguments
-       (list
-        #:tests? #f                     ;tests require missing data
-        #:emacs emacs-no-x              ;needs libxml support
-        #:test-command #~(list "make" "test_internals" "CASK_EXEC=")))
-      (native-inputs (list emacs-ert-runner emacs-ht emacs-yaml))
-      (propagated-inputs (list emacs-compat
-                               emacs-dash
-                               emacs-f
-                               emacs-parsebib
-                               emacs-queue
-                               emacs-s
-                               emacs-string-inflection))
-      (home-page "https://github.com/andras-simonyi/citeproc-el")
-      (synopsis "@acronym{CSL, Citation Style Language} processor for Emacs")
-      (description
-       "Citeproc is an Emacs Lisp library for rendering citations and
+  (package
+    (name "emacs-citeproc")
+    (version "0.9.5")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/andras-simonyi/citeproc-el")
+              (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "07ssnxri3hwzqxa2777zw2grbncznh6n7k4vfsfgyj42vcqm9g19"))))
+    (build-system emacs-build-system)
+    (arguments
+     (list
+      #:tests? #f                     ;tests require missing data
+      #:emacs emacs-no-x              ;needs libxml support
+      #:test-command #~(list "make" "test_internals" "CASK_EXEC=")))
+    (native-inputs (list emacs-ert-runner emacs-ht emacs-yaml))
+    (propagated-inputs (list emacs-compat
+                             emacs-dash
+                             emacs-f
+                             emacs-parsebib
+                             emacs-queue
+                             emacs-s
+                             emacs-string-inflection))
+    (home-page "https://github.com/andras-simonyi/citeproc-el")
+    (synopsis "@acronym{CSL, Citation Style Language} processor for Emacs")
+    (description
+     "Citeproc is an Emacs Lisp library for rendering citations and
 bibliographies in styles described in the @acronym{CSL, Citation Style
 Language}, an XML-based, open format to describe the formatting of
 bibliographic references.")
-      (license license:gpl3+))))
+    (license license:gpl3+)))
 
 (define-public emacs-corfu
   (package
