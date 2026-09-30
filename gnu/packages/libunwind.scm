@@ -28,6 +28,7 @@
   #:use-module (guix utils)
   #:use-module (gnu packages)
   #:use-module (guix build-system gnu)
+  #:use-module (guix build-system trivial)
   #:use-module (guix licenses))
 
 (define-public libunwind
@@ -69,3 +70,20 @@ applications.")
     ;; Do not believe <https://savannah.nongnu.org/projects/libunwind/>:
     ;; see <https://github.com/libunwind/libunwind/issues/372>.
     (license expat)))
+
+(define-public libunwind-static
+  (package
+    (inherit libunwind)
+    (name (string-append (package-name libunwind) "-static"))
+    (build-system trivial-build-system)
+    (arguments
+     (list
+      #:modules '((guix build utils))
+      #:builder
+      #~(begin
+          (use-modules (guix build utils))
+          (let ((target (string-append #$output "/lib/libunwind.a")))
+            (install-file (search-input-file %build-inputs "/lib/libunwind.a")
+                          (dirname target))
+            (remove-store-references target)))))
+    (inputs (list libunwind))))
