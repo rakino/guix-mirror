@@ -1015,7 +1015,7 @@ It comes with the following flavors:
 (define-public emacs-ben
   (package
     (name "emacs-ben")
-    (version "0.12.15")
+    (version "0.12.16")
     (source
      (origin
        (method git-fetch)
@@ -1024,7 +1024,7 @@ It comes with the following flavors:
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "0y0axmklprfsr0icilbabfr1gl351ib62jx7lmg3liadnqqnmyi8"))))
+        (base32 "09506axvks0gzzpr58fd11qc6k3gm8c8vm309dx4miywjzv4vf07"))))
     (build-system emacs-build-system)
     (arguments
      (list
