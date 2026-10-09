@@ -44461,10 +44461,10 @@ other @code{helm-type-file} sources such as @code{helm-locate}.")
     (license license:gpl3+)))
 
 (define-public emacs-telega-server
-  (let ((commit "958824f73ddfca76b2c3234d4189ffcc1ff2cacb"))
+  (let ((commit "12baf7dd3aaa9828cd2d221a4aadfa9ff80c7567"))
     (package
       (name "emacs-telega-server")
-      (version "1.2.0")                 ; defined in server/telega-server.c
+      (version "1.2.1")                 ; defined in server/telega-server.c
       (source
        (origin
          (method git-fetch)
@@ -44472,7 +44472,7 @@ other @code{helm-type-file} sources such as @code{helm-locate}.")
                (url "https://github.com/zevlg/telega.el")
                (commit commit)))
          (sha256
-          (base32 "08yc3b3d7gwicg74yb56facg9six0frlprxzc4i8dq3nm2srzrk7"))
+          (base32 "15i18hfpwslc9ycm0vx0xlzbsmsfzb1rybdqfkwh65xh6rmllbjf"))
          (file-name (git-file-name "emacs-telega" version))))
       (build-system gnu-build-system)
       (arguments
