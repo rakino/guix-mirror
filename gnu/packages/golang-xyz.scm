@@ -745,9 +745,9 @@ by @url{https://www.oasis-open.org/, OASIS}.")
      "Package go-scfg parses scfg files.")
     (license license:expat)))
 
-(define-public go-codeberg-org-emersion-go-sqlite-fts5
+(define-public go-codeberg-org-emersion-go-sqlite3-fts5
   (package
-    (name "go-codeberg-org-emersion-go-sqlite-fts5")
+    (name "go-codeberg-org-emersion-go-sqlite3-fts5")
     (version "0.0.0-20250706114632-932c754e63a6")
     (source
      (origin
@@ -775,6 +775,10 @@ by @url{https://www.oasis-open.org/, OASIS}.")
 go-sqlite3}, that provides full-text search functionality to database
 applications.")
     (license license:expat)))
+
+;; Deprecated on <2026-10-09>.
+(define-deprecated-package go-codeberg-org-emersion-go-sqlite-fts5
+  go-codeberg-org-emersion-go-sqlite3-fts5)
 
 (define-public go-codeberg-org-git-pages-go-slog-syslog
   (package

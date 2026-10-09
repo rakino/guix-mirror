@@ -1277,7 +1277,7 @@ seen, tell, and what.")
                 (apply invoke "make" "install" build-flags)))))))
     (native-inputs
      (list go-codeberg-org-emersion-go-scfg
-           go-codeberg-org-emersion-go-sqlite-fts5
+           go-codeberg-org-emersion-go-sqlite3-fts5
            go-git-sr-ht-sircmpwn-go-bare
            go-github-com-coder-websocket
            go-github-com-emersion-go-sasl
