@@ -5371,9 +5371,9 @@ human readable sizes, parsing.")
 information for Golang.")
     (license license:expat)))
 
-(define-public go-github-com-caarlos0-env
+(define-public go-github-com-caarlos0-env-v11
   (package
-    (name "go-github-com-caarlos0-env")
+    (name "go-github-com-caarlos0-env-v11")
     (version "11.2.2")
     (source
      (origin
@@ -5387,13 +5387,17 @@ information for Golang.")
     (build-system go-build-system)
     (arguments
      (list
-      #:import-path "github.com/caarlos0/env"))
+      #:import-path "github.com/caarlos0/env/v11"))
     (home-page "https://github.com/caarlos0/env")
     (synopsis "Library to parse environment variables into structs")
     (description
      "@code{env} is a simple, zero-dependencies library to parse environment
 variables into structs.")
     (license license:expat)))
+
+;; Deprecated on <2026-10-10>
+(define-deprecated-package go-github-com-caarlos0-env
+  go-github-com-caarlos0-env-v11)
 
 (define-public go-github-com-caarlos0-go-version
   (package

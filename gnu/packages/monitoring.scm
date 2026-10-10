@@ -886,7 +886,7 @@ HTTP.  Features:
                 (rename-file (string-append bin "/cli")
                              (string-append bin "/dgop"))))))))
     (native-inputs
-     (list go-github-com-caarlos0-env
+     (list go-github-com-caarlos0-env-v11
            go-github-com-charmbracelet-bubbles
            go-github-com-charmbracelet-lipgloss
            go-github-com-charmbracelet-log
