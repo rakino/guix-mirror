@@ -5757,7 +5757,7 @@ dust exitinction laws found in the literature.")
 (define-public python-fiasco
   (package
     (name "python-fiasco")
-    (version "0.8.2")
+    (version "0.9.0")
     (source
      (origin
        (method git-fetch)
@@ -5766,7 +5766,7 @@ dust exitinction laws found in the literature.")
               (commit (string-append "v" version))))
        (file-name (git-file-name name version))
        (sha256
-        (base32 "1drlfyppdvjkinic4gky4vgzmr2zva3xyl9xk2fzplx9pz97lgfv"))))
+        (base32 "183isb1mfr9c5zy4br5bnb7frgmj4yx93kpsjy6443558z1y2n78"))))
     (build-system pyproject-build-system)
     (arguments
      (list
